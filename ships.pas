@@ -1,5 +1,5 @@
 /*
- * Space Ships - Video game in which two ships battle
+ * Space Ships - Video game in which two space ships battle
  *
  * Copyright (C) 2019 Mihai Gătejescu (gus666xe@gmail.com)
  *
