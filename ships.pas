@@ -21,9 +21,16 @@ program ships;
 uses crt, graph;
 type
     tripoints = array [0.. 2] of pointtype;
+const
+    step = 10;
+    shuttle_width = 70;
 var
     grdriver, grmode: integer;
     temp: tripoints;
+    shuttle_x, shuttle_y: integer;
+    dimension: word;
+    shuttle: pointer;
+    key_code: char;
 
 procedure draw_shuttle(x, y: integer);
 begin
@@ -86,13 +93,38 @@ begin
     line(x + 55, y + 75, x + 55, y + 120);
 end;
 
+procedure move_shuttle(var x: integer; y, step: integer; shuttle:pointer);
+begin
+    putimage(x, y, shuttle^, xorput);
+    x:= x + step;
+    putimage(x, y, shuttle^, xorput);
+end;
+
 begin
     grdriver:= detect;
     initgraph(grdriver, grmode, 'C:\BP\BGI');
 
+    shuttle_x:= 1;
+    shuttle_y:= 359;
+    draw_shuttle(shuttle_x, shuttle_y);
+    dimension:= imagesize(shuttle_x, shuttle_y,
+                          shuttle_x + 110, shuttle_y +120);
+    getmem(shuttle, dimension);
+    getimage(shuttle_x, shuttle_y, shuttle_x + 110,
+             shuttle_y + 120, shuttle^);
+
     repeat
-        draw_shuttle(1, 359);
-    until keypressed;
+        key_code:= readkey;
+        if key_code = #0 then
+        begin
+            key_code:= readkey;
+            case key_code of
+                #77:begin 
+                    move_shuttle(shuttle_x, shuttle_y, step, shuttle);
+                end;
+            end;
+        end;
+    until key_code = #27;
 
     closegraph;
 end.
