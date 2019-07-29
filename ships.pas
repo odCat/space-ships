@@ -41,14 +41,6 @@ begin
     temp[1].y:= y + 17;
     drawpoly(3, temp);
 
-    temp[0].x:= x + 40;
-    temp[0].y:= y + 30;
-    temp[1].x:= x + 35;
-    temp[1].y:= y + 120;
-    temp[2].x:= x + 40;
-    temp[2].y:= y + 120;
-    drawpoly(3, temp);
-
     { left wing }
     temp[0].x:= x;
     temp[0].y:= y + 110;
@@ -69,29 +61,29 @@ begin
     temp[2].y:= y + 110;
     drawpoly(3, temp);
 
-    rectangle(75, 470, 115, 479);
+    rectangle(x + 70, y + 110, x + 110, y + 120);
 
     { body }
-    rectangle(45, 390, 75, 479);
+    rectangle(x + 40, y + 30, x + 70, y + 120);
 
-    temp[0].x:= 45;
-    temp[0].y:= 390;
-    temp[1].x:= 45;
-    temp[1].y:= 479;
-    temp[2].x:= 40;
-    temp[2].y:= 479;
+    temp[0].x:= x + 40;
+    temp[0].y:= y + 30;
+    temp[1].x:= x + 35;
+    temp[1].y:= y + 120;
+    temp[2].x:= x + 40;
+    temp[2].y:= y + 120;
     drawpoly(3, temp);
     
-    temp[0].x:= 75;
-    temp[0].y:= 390;
-    temp[1].x:= 80;
-    temp[1].y:= 479;
-    temp[2].x:= 75;
-    temp[2].y:= 479;
+    temp[0].x:= x + 70;
+    temp[0].y:= y + 30;
+    temp[1].x:= x + 75;
+    temp[1].y:= y + 120;
+    temp[2].x:= x + 70;
+    temp[2].y:= y + 120;
     drawpoly(3, temp);
 
     { tail }
-    line(60, 435, 60, 479);
+    line(x + 55, y + 75, x + 55, y + 120);
 end;
 
 begin
@@ -99,7 +91,7 @@ begin
     initgraph(grdriver, grmode, 'C:\BP\BGI');
 
     repeat
-        draw_shuttle(0, 360);
+        draw_shuttle(1, 359);
     until keypressed;
 
     closegraph;
