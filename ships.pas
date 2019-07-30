@@ -144,7 +144,7 @@ begin
                     putimage(shuttle_x, shuttle_y, shuttle^, xorput);
                     shuttle_x:= 1;
                     shuttle_y:= getmaxy - ship_height;
-                    draw_shuttle(shuttle_x, shuttle_y);
+                    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
                 end;
                 #75: begin { LEFT ARROW }
                     move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
