@@ -24,6 +24,7 @@ type
 const
     step = 10;
     ship_width = 110;
+    ship_height = 120;
 var
     grdriver, grmode: integer;
     temp: tripoints;
@@ -74,7 +75,7 @@ begin
     rectangle(x + 40, y + 30, x + 70, y + 120);
 
     temp[0].x:= x + 40;
-    temp[0].y:= y + 30;)
+    temp[0].y:= y + 30;
     temp[1].x:= x + 35;
     temp[1].y:= y + 120;
     temp[2].x:= x + 40;
@@ -95,8 +96,10 @@ end;
 
 procedure draw_ufo(x,y: integer);
 begin
-    ellipse(x + 60, y + 90, 0, 360, 60, 30);
-    ellipse(x + 60, y + 75, 0, 360, 30, 30);
+    ellipse(x + 55, y + 90, 0, 360, 55, 30);
+    ellipse(x + 55, y + 80, 0, 180, 32, 32);
+    setcolor(black); setfillstyle(1, black);
+    fillellipse(x + 55, y + 80, 31, 31);
 end;
 
 procedure move_shuttle(var x: integer; y, step: integer;
@@ -116,7 +119,7 @@ begin
     initgraph(grdriver, grmode, 'C:\BP\BGI');
 
     shuttle_x:= 1;
-    shuttle_y:= 359;
+    shuttle_y:= getmaxy - ship_height;
     draw_shuttle(shuttle_x, shuttle_y);
     dimension:= imagesize(shuttle_x, shuttle_y,
                           shuttle_x + 110, shuttle_y +120);
@@ -124,6 +127,12 @@ begin
     getimage(shuttle_x, shuttle_y, shuttle_x + 110,
              shuttle_y + 120, shuttle^);
 
+    ufo_x:= getmaxx - ship_width;
+    ufo_y:= 1;
+    draw_ufo(ufo_x, ufo_y);
+    getmem(ufo, dimension);
+    getimage(ufo_x, ufo_y, ufo_x + ship_width,
+             ufo_y + ship_height, ufo^);
 
     repeat
         key_code:= readkey;
