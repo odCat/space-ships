@@ -122,10 +122,10 @@ begin
     shuttle_y:= getmaxy - ship_height;
     draw_shuttle(shuttle_x, shuttle_y);
     dimension:= imagesize(shuttle_x, shuttle_y,
-                          shuttle_x + 110, shuttle_y +120);
+                          shuttle_x + ship_width, shuttle_y + ship_height);
     getmem(shuttle, dimension);
-    getimage(shuttle_x, shuttle_y, shuttle_x + 110,
-             shuttle_y + 120, shuttle^);
+    getimage(shuttle_x, shuttle_y, shuttle_x + ship_width,
+             shuttle_y + ship_height, shuttle^);
 
     ufo_x:= getmaxx - ship_width;
     ufo_y:= 1;
@@ -143,7 +143,7 @@ begin
                 #72: begin { UP ARROW }
                     putimage(shuttle_x, shuttle_y, shuttle^, xorput);
                     shuttle_x:= 1;
-                    shuttle_y:= 359;
+                    shuttle_y:= getmaxy - ship_height;
                     draw_shuttle(shuttle_x, shuttle_y);
                 end;
                 #75: begin { LEFT ARROW }
