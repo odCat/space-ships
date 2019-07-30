@@ -23,13 +23,13 @@ type
     tripoints = array [0.. 2] of pointtype;
 const
     step = 10;
-    shuttle_width = 70;
+    ship_width = 110;
 var
     grdriver, grmode: integer;
     temp: tripoints;
-    shuttle_x, shuttle_y: integer;
+    shuttle_x, shuttle_y, ufo_x, ufo_y: integer;
     dimension: word;
-    shuttle: pointer;
+    shuttle, ufo: pointer;
     key_code: char;
 
 procedure draw_shuttle(x, y: integer);
@@ -93,11 +93,16 @@ begin
     line(x + 55, y + 75, x + 55, y + 120);
 end;
 
-procedure move_shuttle(var x: integer; y, step: integer; shuttle:pointer);
+procedure move_shuttle(var x: integer; y, step: integer;
+                       shuttle:pointer);
 begin
-    putimage(x, y, shuttle^, xorput);
-    x:= x + step;
-    putimage(x, y, shuttle^, xorput);
+    if ((step > 0) and (x + step + ship_width <= getmaxx)) or
+       ((step < 0) and (x + step >= 0)) then
+    begin
+        putimage(x, y, shuttle^, xorput);
+        x:= x + step;
+        putimage(x, y, shuttle^, xorput);
+    end;
 end;
 
 begin
@@ -119,12 +124,21 @@ begin
         begin
             key_code:= readkey;
             case key_code of
-                #77:begin 
+                #72: begin { UP ARROW }
+                    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+                    shuttle_x:= 1;
+                    shuttle_y:= 359;
+                    draw_shuttle(shuttle_x, shuttle_y);
+                end;
+                #75: begin { LEFT ARROW }
+                    move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
+                end;
+                #77: begin { RIGHT ARROW }
                     move_shuttle(shuttle_x, shuttle_y, step, shuttle);
                 end;
             end;
         end;
-    until key_code = #27;
+    until key_code = #27; { ESCAPE }
 
     closegraph;
 end.
