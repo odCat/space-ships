@@ -74,7 +74,7 @@ begin
     rectangle(x + 40, y + 30, x + 70, y + 120);
 
     temp[0].x:= x + 40;
-    temp[0].y:= y + 30;
+    temp[0].y:= y + 30;)
     temp[1].x:= x + 35;
     temp[1].y:= y + 120;
     temp[2].x:= x + 40;
@@ -91,6 +91,12 @@ begin
 
     { tail }
     line(x + 55, y + 75, x + 55, y + 120);
+end;
+
+procedure draw_ufo(x,y: integer);
+begin
+    ellipse(x + 60, y + 90, 0, 360, 60, 30);
+    ellipse(x + 60, y + 75, 0, 360, 30, 30);
 end;
 
 procedure move_shuttle(var x: integer; y, step: integer;
@@ -117,6 +123,7 @@ begin
     getmem(shuttle, dimension);
     getimage(shuttle_x, shuttle_y, shuttle_x + 110,
              shuttle_y + 120, shuttle^);
+
 
     repeat
         key_code:= readkey;
