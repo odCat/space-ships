@@ -136,22 +136,29 @@ begin
 
     repeat
         key_code:= readkey;
-        if key_code = #0 then
-        begin
-            key_code:= readkey;
-            case key_code of
-                #72: begin { UP ARROW }
-                    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
-                    shuttle_x:= 1;
-                    shuttle_y:= getmaxy - ship_height;
-                    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+        case key_code of
+            #0: begin
+                key_code:= readkey;
+                case key_code of
+                    #72: begin { UP ARROW }
+                        putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+                        shuttle_x:= 1;
+                        shuttle_y:= getmaxy - ship_height;
+                        putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+                    end;
+                    #75: begin { LEFT ARROW }
+                        move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
+                    end;
+                    #77: begin { RIGHT ARROW }
+                        move_shuttle(shuttle_x, shuttle_y, step, shuttle);
+                    end;
                 end;
-                #75: begin { LEFT ARROW }
-                    move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
-                end;
-                #77: begin { RIGHT ARROW }
-                    move_shuttle(shuttle_x, shuttle_y, step, shuttle);
-                end;
+            end;
+            #97: begin { A }
+                move_shuttle(ufo_x, ufo_y, -step, ufo);
+            end;
+            #100: begin { D }
+                move_shuttle(ufo_x, ufo_y, step, ufo);
             end;
         end;
     until key_code = #27; { ESCAPE }
