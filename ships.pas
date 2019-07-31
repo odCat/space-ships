@@ -145,6 +145,10 @@ begin
                         shuttle_x:= 1;
                         shuttle_y:= getmaxy - ship_height;
                         putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+                        putimage(ufo_x, ufo_y, ufo^, xorput);
+                        ufo_x:= getmaxx - ship_width;
+                        ufo_y:= 1;
+                        putimage(ufo_x, ufo_y, ufo^, xorput);
                     end;
                     #75: begin { LEFT ARROW }
                         move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
