@@ -96,10 +96,20 @@ end;
 
 procedure draw_ufo(x,y: integer);
 begin
-    ellipse(x + 55, y + 90, 0, 360, 55, 30);
+    ellipse(x + 55, y + 90, 0, 180, 55, 20);
+    ellipse(x + 55, y + 90, 0, 180, 53, 18);
     ellipse(x + 55, y + 80, 0, 180, 32, 32);
+    ellipse(x + 55, y + 80, 180, 185, 32, 32);
+    ellipse(x + 55, y + 80, 355, 360, 32, 32);
     setcolor(black); setfillstyle(1, black);
     fillellipse(x + 55, y + 80, 31, 31);
+    setcolor(white);
+    ellipse(x + 55, y + 90, 180, 360, 55, 20);
+    ellipse(x + 55, y + 90, 180, 360, 53, 18);
+    ellipse(x + 57, y + 88, 0, 360, 6, 6);
+    ellipse(x + 73, y + 86, 0, 360, 5, 5);
+    ellipse(x + 38, y + 85, 0, 360, 5, 5);
+    ellipse(x + 55, y + 30, 251, 289, 55, 24);
 end;
 
 procedure move_shuttle(var x: integer; y, step: integer;
