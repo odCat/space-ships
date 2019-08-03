@@ -94,7 +94,7 @@ begin
     line(x + 55, y + 75, x + 55, y + 120);
 end;
 
-procedure draw_ufo(x,y: integer);
+procedure draw_ufo1(x,y: integer);
 begin
     ellipse(x + 55, y + 90, 0, 180, 55, 20);
     ellipse(x + 55, y + 90, 0, 180, 53, 18);
@@ -110,6 +110,18 @@ begin
     ellipse(x + 73, y + 86, 0, 360, 5, 5);
     ellipse(x + 38, y + 85, 0, 360, 5, 5);
     ellipse(x + 55, y + 30, 251, 289, 55, 24);
+end;
+
+procedure draw_ufo2(x, y: integer);
+begin
+    ellipse(x + 55, y + 27, 0, 180, 27, 27);
+    rectangle(x + 28, y + 27, x + 83, y + 32);
+    line(x, y + 47, x + 28, y + 32);
+    line(x, y + 47, x + 110, y + 47);
+    line(x + 83, y + 32, x + 110, y + 47);
+    line(x, y + 47, x + 28, y + 62);
+    line(x + 28, y + 62, x + 83, y + 62);
+    line(x + 83, y + 62, x + 110, y + 47);
 end;
 
 procedure move_shuttle(var x: integer; y, step: integer;
@@ -139,7 +151,7 @@ begin
 
     ufo_x:= getmaxx - ship_width;
     ufo_y:= 1;
-    draw_ufo(ufo_x, ufo_y);
+    draw_ufo2(ufo_x, ufo_y);
     getmem(ufo, dimension);
     getimage(ufo_x, ufo_y, ufo_x + ship_width,
              ufo_y + ship_height, ufo^);
