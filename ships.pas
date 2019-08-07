@@ -136,6 +136,14 @@ begin
     end;
 end;
 
+procedure shuttle_fire(x, y: integer);
+begin
+end;
+
+procedure ufo_fire(x, y: integer);
+begin
+end;
+
 begin
     grdriver:= detect;
     initgraph(grdriver, grmode, 'C:\BP\BGI');
