@@ -138,6 +138,7 @@ end;
 
 procedure shuttle_fire(x, y: integer);
 begin
+    line(x + 55, y - 1, x + 55, y - 6);
 end;
 
 procedure ufo_fire(x, y: integer);
@@ -171,6 +172,7 @@ begin
                 key_code:= readkey;
                 case key_code of
                     #72: begin { UP ARROW }
+                        {
                         putimage(shuttle_x, shuttle_y, shuttle^, xorput);
                         shuttle_x:= 1;
                         shuttle_y:= getmaxy - ship_height;
@@ -179,6 +181,8 @@ begin
                         ufo_x:= getmaxx - ship_width;
                         ufo_y:= 1;
                         putimage(ufo_x, ufo_y, ufo^, xorput);
+                        }
+                        shuttle_fire(shuttle_x, shuttle_y);
                     end;
                     #75: begin { LEFT ARROW }
                         move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
