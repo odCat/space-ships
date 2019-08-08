@@ -145,6 +145,19 @@ procedure ufo_fire(x, y: integer);
 begin
 end;
 
+procedure reset_ships(var shuttle_x, ufo_x: integer;
+        shuttle_y, ufo_y: integer; shuttle, ufo: pointer);
+begin
+    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+    shuttle_x:= 1;
+    shuttle_y:= getmaxy - ship_height;
+    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+    putimage(ufo_x, ufo_y, ufo^, xorput);
+    ufo_x:= getmaxx - ship_width;
+    ufo_y:= 1;
+    putimage(ufo_x, ufo_y, ufo^, xorput);
+end;
+
 begin
     grdriver:= detect;
     initgraph(grdriver, grmode, 'C:\BP\BGI');
@@ -172,6 +185,7 @@ begin
                 key_code:= readkey;
                 case key_code of
                     #72: begin { UP ARROW }
+                        { TODO: Move to a rest function }
                         {
                         putimage(shuttle_x, shuttle_y, shuttle^, xorput);
                         shuttle_x:= 1;
@@ -182,7 +196,11 @@ begin
                         ufo_y:= 1;
                         putimage(ufo_x, ufo_y, ufo^, xorput);
                         }
+                        {
                         shuttle_fire(shuttle_x, shuttle_y);
+                        }
+                        reset_ships(shuttle_x, ufo_x, shuttle_y, ufo_y,
+                                    shuttle, ufo);
                     end;
                     #75: begin { LEFT ARROW }
                         move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
