@@ -137,8 +137,22 @@ begin
 end;
 
 procedure shuttle_fire(x, y: integer);
+var
+    dimension: word;
+    projectile: pointer;
 begin
-    line(x + 55, y - 1, x + 55, y - 6);
+    line(x + 55, y - 1, x + 55, y - 11);
+    dimension:= imagesize(x + 55, y - 1, x + 55, y - 11);
+    getmem(projectile, dimension);
+    getimage(x + 55, y - 1, x + 55, y - 11, projectile^);
+
+    while y > 0 do
+    begin
+        putimage(x + 55, y - 11, projectile^, xorput);
+        y:= y - 10;
+        putimage(x + 55, y - 11, projectile^, xorput);
+        delay(100);
+    end;
 end;
 
 procedure ufo_fire(x, y: integer);
@@ -185,22 +199,11 @@ begin
                 key_code:= readkey;
                 case key_code of
                     #72: begin { UP ARROW }
-                        { TODO: Move to a rest function }
                         {
-                        putimage(shuttle_x, shuttle_y, shuttle^, xorput);
-                        shuttle_x:= 1;
-                        shuttle_y:= getmaxy - ship_height;
-                        putimage(shuttle_x, shuttle_y, shuttle^, xorput);
-                        putimage(ufo_x, ufo_y, ufo^, xorput);
-                        ufo_x:= getmaxx - ship_width;
-                        ufo_y:= 1;
-                        putimage(ufo_x, ufo_y, ufo^, xorput);
-                        }
-                        {
-                        shuttle_fire(shuttle_x, shuttle_y);
-                        }
                         reset_ships(shuttle_x, ufo_x, shuttle_y, ufo_y,
                                     shuttle, ufo);
+                        }
+                        shuttle_fire(shuttle_x, shuttle_y);
                     end;
                     #75: begin { LEFT ARROW }
                         move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
