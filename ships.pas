@@ -213,6 +213,10 @@ begin
                     end;
                 end;
             end;
+            #32: begin { SPACE }
+                reset_ships(shuttle_x, ufo_x, shuttle_y, ufo_y,
+                            shuttle, ufo);
+            end;
             #97: begin { A }
                 move_shuttle(ufo_x, ufo_y, -step, ufo);
             end;
