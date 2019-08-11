@@ -24,7 +24,8 @@ type
 const
     step = 10;
     ship_width = 110;
-    ship_height = 120;
+    shuttle_height = 120;
+    ufo_height = 63;
 var
     grdriver, grmode: integer;
     temp: tripoints;
@@ -178,17 +179,40 @@ begin
     setcolor(white);
 end;
 
+procedure explode(x, y, which_ship: integer);
+var
+    height: integer;
+begin
+    if which_ship = 0 then
+    begin
+        height:= shuttle_height;
+    end
+    else begin
+        height:= ufo_height;
+    end;
+
+    bar(x, y, x + ship_width, y + height);
+    delay(100);
+    setfillstyle(1, black);
+    bar(x, y, x + ship_width, y + height);
+    setfillstyle(1, white);
+end;
+
 procedure reset_ships(var shuttle_x, ufo_x: integer;
         shuttle_y, ufo_y: integer; shuttle, ufo: pointer);
 begin
-    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+    setfillstyle(1, black);
+    bar(shuttle_x, shuttle_y, shuttle_x + ship_width,
+        shuttle_y + shuttle_height);
     shuttle_x:= 1;
-    shuttle_y:= getmaxy - ship_height;
+    shuttle_y:= getmaxy - shuttle_height;
     putimage(shuttle_x, shuttle_y, shuttle^, xorput);
-    putimage(ufo_x, ufo_y, ufo^, xorput);
+
+    bar(ufo_x, ufo_y, ufo_x + ship_width, ufo_y + ufo_height);
     ufo_x:= getmaxx - ship_width;
     ufo_y:= 1;
     putimage(ufo_x, ufo_y, ufo^, xorput);
+    setfillstyle(1, white);
 end;
 
 begin
@@ -196,20 +220,20 @@ begin
     initgraph(grdriver, grmode, 'C:\BP\BGI');
 
     shuttle_x:= 1;
-    shuttle_y:= getmaxy - ship_height;
+    shuttle_y:= getmaxy - shuttle_height;
     draw_shuttle(shuttle_x, shuttle_y);
     dimension:= imagesize(shuttle_x, shuttle_y,
-                          shuttle_x + ship_width, shuttle_y + ship_height);
+                          shuttle_x + ship_width, shuttle_y + shuttle_height);
     getmem(shuttle, dimension);
     getimage(shuttle_x, shuttle_y, shuttle_x + ship_width,
-             shuttle_y + ship_height, shuttle^);
+             shuttle_y + shuttle_height, shuttle^);
 
     ufo_x:= getmaxx - ship_width;
     ufo_y:= 1;
     draw_ufo2(ufo_x, ufo_y);
     getmem(ufo, dimension);
     getimage(ufo_x, ufo_y, ufo_x + ship_width,
-             ufo_y + ship_height, ufo^);
+             ufo_y + shuttle_height, ufo^);
 
     repeat
         key_code:= readkey;
@@ -232,13 +256,17 @@ begin
                 reset_ships(shuttle_x, ufo_x, shuttle_y, ufo_y,
                             shuttle, ufo);
             end;
+            #49: begin { 1 }
+                explode(shuttle_x, shuttle_y, 0);
+                explode(ufo_x, ufo_y, 1);
+            end;
             #97: begin { A }
                 move_shuttle(ufo_x, ufo_y, -step, ufo);
             end;
             #100: begin { D }
                 move_shuttle(ufo_x, ufo_y, step, ufo);
             end;
-            #115, #118: begin
+            #115, #119: begin
                 ufo_fire(ufo_x, ufo_y);
             end;
         end;
