@@ -141,6 +141,7 @@ var
     dimension: word;
     projectile: pointer;
 begin
+    setcolor(lightred);
     line(x + 55, y - 1, x + 55, y - 11);
     dimension:= imagesize(x + 55, y - 1, x + 55, y - 11);
     getmem(projectile, dimension);
@@ -153,10 +154,28 @@ begin
         putimage(x + 55, y - 11, projectile^, xorput);
         delay(100);
     end;
+    setcolor(white);
 end;
 
 procedure ufo_fire(x, y: integer);
+var
+    dimension: word;
+    projectile: pointer;
 begin
+    setcolor(yellow);
+    line(x + 55, y + 63, x + 55, y + 73);
+    dimension:= imagesize(x + 55, y + 63, x + 55, y + 73);
+    getmem(projectile, dimension);
+    getimage(x + 55, y + 63, x + 55, y + 73, projectile^);
+
+    while y < getmaxy - 10 do
+    begin
+        putimage(x + 55, y + 63, projectile^, xorput);
+        y:= y + 10;
+        putimage(x + 55, y + 63, projectile^, xorput);
+        delay(100);
+    end;
+    setcolor(white);
 end;
 
 procedure reset_ships(var shuttle_x, ufo_x: integer;
@@ -199,10 +218,6 @@ begin
                 key_code:= readkey;
                 case key_code of
                     #72: begin { UP ARROW }
-                        {
-                        reset_ships(shuttle_x, ufo_x, shuttle_y, ufo_y,
-                                    shuttle, ufo);
-                        }
                         shuttle_fire(shuttle_x, shuttle_y);
                     end;
                     #75: begin { LEFT ARROW }
@@ -222,6 +237,9 @@ begin
             end;
             #100: begin { D }
                 move_shuttle(ufo_x, ufo_y, step, ufo);
+            end;
+            #115, #118: begin
+                ufo_fire(ufo_x, ufo_y);
             end;
         end;
     until key_code = #27; { ESCAPE }
