@@ -206,6 +206,15 @@ begin
         ufo_y:= ufo_y + 10;
         putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
         delay(100);
+
+        { hit }
+        if (ufo_y > getmaxy - shuttle_height) and
+           (ufo_x > shuttle_x - 55) and
+           (ufo_x < shuttle_x - 55 + ship_width) then
+        begin
+            explode(shuttle_x, shuttle_y, 0);
+            break;
+        end;
     end;
     setcolor(white);
 end;
