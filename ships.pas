@@ -137,7 +137,7 @@ begin
     end;
 end;
 
-procedure shuttle_fire(shuttle_x, shuttle_y: integer);
+procedure shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y: integer);
 var
     dimension: word;
     projectile: pointer;
@@ -244,7 +244,7 @@ begin
                 key_code:= readkey;
                 case key_code of
                     #72: begin { UP ARROW }
-                        shuttle_fire(shuttle_x, shuttle_y);
+                        shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y);
                     end;
                     #75: begin { LEFT ARROW }
                         move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
