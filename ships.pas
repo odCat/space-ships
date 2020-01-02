@@ -137,6 +137,26 @@ begin
     end;
 end;
 
+{ which_ship: 0 - shuttle, 1 - ufo }
+procedure explode(x, y, which_ship: integer);
+var
+    height: integer;
+begin
+    if which_ship = 0 then
+    begin
+        height:= shuttle_height;
+    end
+    else begin
+        height:= ufo_height;
+    end;
+
+    bar(x, y, x + ship_width, y + height);
+    delay(100);
+    setfillstyle(1, black);
+    bar(x, y, x + ship_width, y + height);
+    setfillstyle(1, white);
+end;
+
 procedure shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y: integer);
 var
     dimension: word;
@@ -156,6 +176,14 @@ begin
         shuttle_y:= shuttle_y - 10;
         putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
         delay(100);
+        {
+        if (shuttle_y < ufo_height) and
+           (shuttle_x > ufo_x) and (shuttle_x < ufo_x + ship_width) then
+        begin
+            explode(ufo_x, ufo_y, 1);
+            break;
+        end;
+        }
     end;
     setcolor(white);
 end;
@@ -179,26 +207,6 @@ begin
         delay(100);
     end;
     setcolor(white);
-end;
-
-{ which_ship: 0 - shuttle, 1 - ufo }
-procedure explode(x, y, which_ship: integer);
-var
-    height: integer;
-begin
-    if which_ship = 0 then
-    begin
-        height:= shuttle_height;
-    end
-    else begin
-        height:= ufo_height;
-    end;
-
-    bar(x, y, x + ship_width, y + height);
-    delay(100);
-    setfillstyle(1, black);
-    bar(x, y, x + ship_width, y + height);
-    setfillstyle(1, white);
 end;
 
 procedure reset_ships(var shuttle_x, ufo_x: integer;
