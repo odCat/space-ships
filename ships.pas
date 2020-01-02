@@ -244,7 +244,7 @@ begin
     draw_ufo2(ufo_x, ufo_y);
     getmem(ufo, dimension);
     getimage(ufo_x, ufo_y, ufo_x + ship_width,
-             ufo_y + shuttle_height, ufo^);
+             ufo_y + ufo_height, ufo^);
 
     repeat
         key_code:= readkey;
