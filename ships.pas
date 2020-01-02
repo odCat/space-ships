@@ -181,6 +181,7 @@ begin
     setcolor(white);
 end;
 
+{ which_ship: 0 - shuttle, 1 - ufo }
 procedure explode(x, y, which_ship: integer);
 var
     height: integer;
