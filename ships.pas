@@ -137,22 +137,24 @@ begin
     end;
 end;
 
-procedure shuttle_fire(x, y: integer);
+procedure shuttle_fire(shuttle_x, shuttle_y: integer);
 var
     dimension: word;
     projectile: pointer;
 begin
     setcolor(lightred);
-    line(x + 55, y - 1, x + 55, y - 11);
-    dimension:= imagesize(x + 55, y - 1, x + 55, y - 11);
+    line(shuttle_x + 55, shuttle_y - 1, shuttle_x + 55, shuttle_y - 11);
+    dimension:= imagesize(shuttle_x + 55, shuttle_y - 1,
+                          shuttle_x + 55, shuttle_y - 11);
     getmem(projectile, dimension);
-    getimage(x + 55, y - 1, x + 55, y - 11, projectile^);
+    getimage(shuttle_x + 55, shuttle_y - 1, shuttle_x + 55, shuttle_y - 11,
+             projectile^);
 
-    while y > 0 do
+    while shuttle_y > 0 do
     begin
-        putimage(x + 55, y - 11, projectile^, xorput);
-        y:= y - 10;
-        putimage(x + 55, y - 11, projectile^, xorput);
+        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
+        shuttle_y:= shuttle_y - 10;
+        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
         delay(100);
     end;
     setcolor(white);
