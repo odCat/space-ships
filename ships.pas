@@ -137,7 +137,6 @@ begin
     end;
 end;
 
-{ which_ship: 0 - shuttle, 1 - ufo }
 procedure explode(x, y, ship_height: integer);
 begin
     bar(x, y, x + ship_width, y + ship_height);
@@ -145,6 +144,20 @@ begin
     setfillstyle(1, black);
     bar(x, y, x + ship_width, y + ship_height);
     setfillstyle(1, white);
+end;
+
+{
+function shuttle_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y: integer): boolean;
+begin
+    shuttle_is_hit:= true;
+end;
+}
+
+function ufo_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y: integer): boolean;
+begin
+    ufo_is_hit:= ((shuttle_y < ufo_height) and
+                  (shuttle_x > ufo_x - 55) and
+                  (shuttle_x < ufo_x - 55 + ship_width));
 end;
 
 procedure shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y: integer);
@@ -162,19 +175,16 @@ begin
 
     while shuttle_y > 0 do
     begin
-        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
-        shuttle_y:= shuttle_y - 10;
-        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
-        delay(100);
-        
-        { hit }
-        if (shuttle_y < ufo_height) and
-           (shuttle_x > ufo_x - 55) and
-           (shuttle_x < ufo_x - 55 + ship_width) then
+        if (ufo_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y)) then
         begin
             explode(ufo_x, ufo_y, ufo_height);
             break;
         end;
+
+        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
+        shuttle_y:= shuttle_y - 10;
+        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
+        delay(100);
     end;
     setcolor(white);
 end;
