@@ -146,12 +146,12 @@ begin
     setfillstyle(1, white);
 end;
 
-{
 function shuttle_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y: integer): boolean;
 begin
-    shuttle_is_hit:= true;
+    shuttle_is_hit:= (ufo_y > getmaxy - shuttle_height)
+                     and (ufo_x > shuttle_x - 55) and
+                     (ufo_x < shuttle_x - 55 + ship_width);
 end;
-}
 
 function ufo_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y: integer): boolean;
 begin
@@ -207,10 +207,7 @@ begin
         putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
         delay(100);
 
-        { hit }
-        if (ufo_y > getmaxy - shuttle_height) and
-           (ufo_x > shuttle_x - 55) and
-           (ufo_x < shuttle_x - 55 + ship_width) then
+        if (shuttle_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y)) then
         begin
             explode(shuttle_x, shuttle_y, shuttle_height);
             break;
