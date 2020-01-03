@@ -138,22 +138,12 @@ begin
 end;
 
 { which_ship: 0 - shuttle, 1 - ufo }
-procedure explode(x, y, which_ship: integer);
-var
-    height: integer;
+procedure explode(x, y, ship_height: integer);
 begin
-    if which_ship = 0 then
-    begin
-        height:= shuttle_height;
-    end
-    else begin
-        height:= ufo_height;
-    end;
-
-    bar(x, y, x + ship_width, y + height);
+    bar(x, y, x + ship_width, y + ship_height);
     delay(100);
     setfillstyle(1, black);
-    bar(x, y, x + ship_width, y + height);
+    bar(x, y, x + ship_width, y + ship_height);
     setfillstyle(1, white);
 end;
 
@@ -182,7 +172,7 @@ begin
            (shuttle_x > ufo_x - 55) and
            (shuttle_x < ufo_x - 55 + ship_width) then
         begin
-            explode(ufo_x, ufo_y, 1);
+            explode(ufo_x, ufo_y, ufo_height);
             break;
         end;
     end;
@@ -212,7 +202,7 @@ begin
            (ufo_x > shuttle_x - 55) and
            (ufo_x < shuttle_x - 55 + ship_width) then
         begin
-            explode(shuttle_x, shuttle_y, 0);
+            explode(shuttle_x, shuttle_y, shuttle_height);
             break;
         end;
     end;
