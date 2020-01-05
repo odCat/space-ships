@@ -29,71 +29,72 @@ const
 var
     grdriver, grmode: integer;
     shuttle_x, shuttle_y, ufo_x, ufo_y: integer;
+    shuttle_position, ufo_position: pointtype;
     dimension: word;
     shuttle, ufo: pointer;
     key_code: char;
 
-procedure draw_shuttle(x, y: integer);
+procedure draw_shuttle(shuttle: pointtype);
 var
     temp: tripoints;
 begin
     { tip }
-    temp[0].x:= x + 40;
-    temp[0].y:= y + 30;
-    temp[1].x:= x + 55;
-    temp[1].y:= y;
-    temp[2].x:= x + 70;
-    temp[2].y:= y + 30;
+    temp[0].x:= shuttle.x + 40;
+    temp[0].y:= shuttle.y + 30;
+    temp[1].x:= shuttle.x + 55;
+    temp[1].y:= shuttle.y;
+    temp[2].x:= shuttle.x + 70;
+    temp[2].y:= shuttle.y + 30;
     drawpoly(3, temp);
 
-    temp[1].y:= y + 10;
+    temp[1].y:= shuttle.y + 10;
     drawpoly(3, temp);
-    temp[1].y:= y + 17;
+    temp[1].y:= shuttle.y + 17;
     drawpoly(3, temp);
 
     { left wing }
-    temp[0].x:= x;
-    temp[0].y:= y + 110;
-    temp[1].x:= x + 40;
-    temp[1].y:= y + 75;
-    temp[2].x:= x + 40; { why donesn't print this vertex }
-    temp[2].y:= y + 110;
+    temp[0].x:= shuttle.x;
+    temp[0].y:= shuttle.y + 110;
+    temp[1].x:= shuttle.x + 40;
+    temp[1].y:= shuttle.y + 75;
+    temp[2].x:= shuttle.x + 40; { why donesn't print this vertex }
+    temp[2].y:= shuttle.y + 110;
     drawpoly(3, temp);
 
-    rectangle(x, y + 110, x + 40, y + 120);
+    rectangle(shuttle.x, shuttle.y + 110, shuttle.x + 40, shuttle.y + 120);
 
     { right wing }
-    temp[0].x:= x + 70;
-    temp[0].y:= y + 75;
-    temp[1].x:= x + 110;
-    temp[1].y:= y + 110;
-    temp[2].x:= x + 70;
-    temp[2].y:= y + 110;
+    temp[0].x:= shuttle.x + 70;
+    temp[0].y:= shuttle.y + 75;
+    temp[1].x:= shuttle.x + 110;
+    temp[1].y:= shuttle.y + 110;
+    temp[2].x:= shuttle.x + 70;
+    temp[2].y:= shuttle.y + 110;
     drawpoly(3, temp);
 
-    rectangle(x + 70, y + 110, x + 110, y + 120);
+    rectangle(shuttle.x + 70, shuttle.y + 110, shuttle.x + 110, shuttle.y + 120);
 
     { body }
-    rectangle(x + 40, y + 30, x + 70, y + 120);
+    rectangle(shuttle.x + 40, shuttle.y + 30, shuttle.x + 70, shuttle.y + 120);
 
-    temp[0].x:= x + 40;
-    temp[0].y:= y + 30;
-    temp[1].x:= x + 35;
-    temp[1].y:= y + 120;
-    temp[2].x:= x + 40;
-    temp[2].y:= y + 120;
+    temp[0].x:= shuttle.x + 40;
+    temp[0].y:= shuttle.y + 30;
+    temp[1].x:= shuttle.x + 35;
+    temp[1].y:= shuttle.y + 120;
+    temp[2].x:= shuttle.x + 40;
+    temp[2].y:= shuttle.y + 120;
     drawpoly(3, temp);
     
-    temp[0].x:= x + 70;
-    temp[0].y:= y + 30;
-    temp[1].x:= x + 75;
-    temp[1].y:= y + 120;
-    temp[2].x:= x + 70;
-    temp[2].y:= y + 120;
+    temp[0].x:= shuttle.x + 70;
+    temp[0].y:= shuttle.y + 30;
+    temp[1].x:= shuttle.x + 75;
+    temp[1].y:= shuttle.y + 120;
+    temp[2].x:= shuttle.x + 70;
+    temp[2].y:= shuttle.y + 120;
     drawpoly(3, temp);
 
     { tail }
-    line(x + 55, y + 75, x + 55, y + 120);
+    line(shuttle.x + 55, shuttle.y + 75, shuttle.x + 55, shuttle.y + 120);
 end;
 
 procedure draw_ufo1(x,y: integer);
@@ -238,14 +239,21 @@ begin
     grdriver:= detect;
     initgraph(grdriver, grmode, 'C:\BP\BGI');
 
-    shuttle_x:= 1;
+    { deprecated }
+    shuttle_x:=1;
     shuttle_y:= getmaxy - shuttle_height;
-    draw_shuttle(shuttle_x, shuttle_y);
-    dimension:= imagesize(shuttle_x, shuttle_y,
-                          shuttle_x + ship_width, shuttle_y + shuttle_height);
+
+    shuttle_position.x:= 1;
+    shuttle_position.y:= getmaxy - shuttle_height;
+    draw_shuttle(shuttle_position);
+    dimension:= imagesize(shuttle_position.x, shuttle_position.y,
+                          shuttle_position.x + ship_width,
+                          shuttle_position.y + shuttle_height);
+
     getmem(shuttle, dimension);
-    getimage(shuttle_x, shuttle_y, shuttle_x + ship_width,
-             shuttle_y + shuttle_height, shuttle^);
+    getimage(shuttle_position.x, shuttle_position.y,
+             shuttle_position.x + ship_width,
+             shuttle_position.y + shuttle_height, shuttle^);
 
     ufo_x:= getmaxx - ship_width;
     ufo_y:= 1;
