@@ -28,13 +28,14 @@ const
     ufo_height = 63;
 var
     grdriver, grmode: integer;
-    temp: tripoints;
     shuttle_x, shuttle_y, ufo_x, ufo_y: integer;
     dimension: word;
     shuttle, ufo: pointer;
     key_code: char;
 
 procedure draw_shuttle(x, y: integer);
+var
+    temp: tripoints;
 begin
     { tip }
     temp[0].x:= x + 40;
@@ -202,16 +203,16 @@ begin
 
     while ufo_y < getmaxy - 10 do
     begin
-        putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
-        ufo_y:= ufo_y + 10;
-        putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
-        delay(100);
-
         if (shuttle_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y)) then
         begin
             explode(shuttle_x, shuttle_y, shuttle_height);
             break;
         end;
+
+        putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
+        ufo_y:= ufo_y + 10;
+        putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
+        delay(100);
     end;
     setcolor(white);
 end;
