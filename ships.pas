@@ -147,12 +147,12 @@ begin
     end;
 end;
 
-procedure explode(x, y, ship_height: integer);
+procedure explode(position: pointtype; ship_height: integer);
 begin
-    bar(x, y, x + ship_width, y + ship_height);
+    bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
     delay(100);
     setfillstyle(1, black);
-    bar(x, y, x + ship_width, y + ship_height);
+    bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
     setfillstyle(1, white);
 end;
 
@@ -188,7 +188,7 @@ begin
     begin
         if (ufo_is_hit(shuttle_pos.x, shuttle_pos.y, ufo_pos.x, ufo_pos.y)) then
         begin
-            explode(ufo_pos.x, ufo_pos.y, ufo_height);
+            explode(ufo_pos, ufo_height);
             break;
         end;
 
@@ -200,28 +200,29 @@ begin
     setcolor(white);
 end;
 
-procedure ufo_fire(ufo_x, ufo_y, shuttle_x, shuttle_y: integer);
+procedure ufo_fire(ufo_pos, shuttle_pos: pointtype);
 var
     dimension: word;
     projectile: pointer;
 begin
     setcolor(yellow);
-    line(ufo_x + 55, ufo_y + 63, ufo_x + 55, ufo_y + 73);
-    dimension:= imagesize(ufo_x + 55, ufo_y + 63, ufo_x + 55, ufo_y + 73);
+    line(ufo_pos.x + 55, ufo_pos.y + 63, ufo_pos.x + 55, ufo_pos.y + 73);
+    dimension:= imagesize(ufo_pos.x + 55, ufo_pos.y + 63,
+                          ufo_pos.x + 55, ufo_pos.y + 73);
     getmem(projectile, dimension);
-    getimage(ufo_x + 55, ufo_y + 63, ufo_x + 55, ufo_y + 73, projectile^);
+    getimage(ufo_pos.x + 55, ufo_pos.y + 63, ufo_pos.x + 55, ufo_pos.y + 73, projectile^);
 
-    while ufo_y < getmaxy - 10 do
+    while ufo_pos.y < getmaxy - 10 do
     begin
-        if (shuttle_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y)) then
+        if (shuttle_is_hit(shuttle_pos.x, shuttle_pos.y, ufo_pos.x, ufo_pos.y)) then
         begin
-            explode(shuttle_x, shuttle_y, shuttle_height);
+            explode(shuttle_pos, shuttle_height);
             break;
         end;
 
-        putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
-        ufo_y:= ufo_y + 10;
-        putimage(ufo_x + 55, ufo_y + 63, projectile^, xorput);
+        putimage(ufo_pos.x + 55, ufo_pos.y + 63, projectile^, xorput);
+        ufo_pos.y:= ufo_pos.y + 10;
+        putimage(ufo_pos.x + 55, ufo_pos.y + 63, projectile^, xorput);
         delay(100);
     end;
     setcolor(white);
@@ -297,8 +298,8 @@ begin
                             shuttle, ufo);
             end;
             #49: begin { 1 }
-                explode(shuttle_x, shuttle_y, 0);
-                explode(ufo_x, ufo_y, 1);
+                explode(shuttle_position, 0);
+                explode(ufo_position, 1);
             end;
             #97: begin { A }
                 move_ship(ufo_x, ufo_y, -step, ufo);
@@ -307,7 +308,7 @@ begin
                 move_ship(ufo_x, ufo_y, step, ufo);
             end;
             #115, #119: begin
-                ufo_fire(ufo_x, ufo_y, shuttle_x, shuttle_y);
+                ufo_fire(ufo_position, shuttle_position);
             end;
         end;
     until key_code = #27; { ESCAPE }
