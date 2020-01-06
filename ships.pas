@@ -115,16 +115,23 @@ begin
     ellipse(x + 55, y + 30, 251, 289, 55, 24);
 end;
 
-procedure draw_ufo2(x, y: integer);
+procedure draw_ufo2(ufo_position: pointtype);
 begin
-    ellipse(x + 55, y + 27, 0, 180, 27, 27);
-    rectangle(x + 28, y + 27, x + 83, y + 32);
-    line(x, y + 47, x + 28, y + 32);
-    line(x, y + 47, x + 110, y + 47);
-    line(x + 83, y + 32, x + 110, y + 47);
-    line(x, y + 47, x + 28, y + 62);
-    line(x + 28, y + 62, x + 83, y + 62);
-    line(x + 83, y + 62, x + 110, y + 47);
+    ellipse(ufo_position.x + 55, ufo_position.y + 27, 0, 180, 27, 27);
+    rectangle(ufo_position.x + 28, ufo_position.y + 27, ufo_position.x + 83,
+              ufo_position.y + 32);
+    line(ufo_position.x, ufo_position.y + 47, ufo_position.x + 28,
+         ufo_position.y + 32);
+    line(ufo_position.x, ufo_position.y + 47, ufo_position.x + 110,
+         ufo_position.y + 47);
+    line(ufo_position.x + 83, ufo_position.y + 32, ufo_position.x + 110,
+         ufo_position.y + 47);
+    line(ufo_position.x, ufo_position.y + 47, ufo_position.x + 28,
+         ufo_position.y + 62);
+    line(ufo_position.x + 28, ufo_position.y + 62, ufo_position.x + 83,
+         ufo_position.y + 62);
+    line(ufo_position.x + 83, ufo_position.y + 62, ufo_position.x + 110,
+         ufo_position.y + 47);
 end;
 
 procedure move_shuttle(var x: integer; y, step: integer;
@@ -255,12 +262,16 @@ begin
              shuttle_position.x + ship_width,
              shuttle_position.y + shuttle_height, shuttle^);
 
+    { deprecated }
     ufo_x:= getmaxx - ship_width;
     ufo_y:= 1;
-    draw_ufo2(ufo_x, ufo_y);
+
+    ufo_position.x:= getmaxx - ship_width;
+    ufo_position.y:= 1;
+    draw_ufo2(ufo_position);
     getmem(ufo, dimension);
-    getimage(ufo_x, ufo_y, ufo_x + ship_width,
-             ufo_y + ufo_height, ufo^);
+    getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
+             ufo_position.y + ufo_height, ufo^);
 
     repeat
         key_code:= readkey;
