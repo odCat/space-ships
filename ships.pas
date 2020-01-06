@@ -28,7 +28,6 @@ const
     ufo_height = 63;
 var
     grdriver, grmode: integer;
-    shuttle_x, shuttle_y, ufo_x, ufo_y: integer;
     shuttle_position, ufo_position: pointtype;
     dimension: word;
     shuttle, ufo: pointer;
@@ -155,11 +154,11 @@ begin
     setfillstyle(1, white);
 end;
 
-function shuttle_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y: integer): boolean;
+function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
 begin
-    shuttle_is_hit:= (ufo_y > getmaxy - shuttle_height)
-                     and (ufo_x > shuttle_x - 55) and
-                     (ufo_x < shuttle_x - 55 + ship_width);
+    shuttle_is_hit:= (projectile.y > getmaxy - shuttle_height)
+                     and (projectile.x > shuttle_pos.x - 55) and
+                     (projectile.x < shuttle_pos.x - 55 + ship_width);
 end;
 
 function ufo_is_hit(projectile, ufo_position: pointtype): boolean;
@@ -214,7 +213,7 @@ begin
 
     while ufo_pos.y < getmaxy - 10 do
     begin
-        if (shuttle_is_hit(shuttle_pos.x, shuttle_pos.y, ufo_pos.x, ufo_pos.y)) then
+        if (shuttle_is_hit(shuttle_pos, ufo_pos)) then
         begin
             explode(shuttle_pos, shuttle_height);
             break;
@@ -228,30 +227,25 @@ begin
     setcolor(white);
 end;
 
-procedure reset_ships(var shuttle_x, ufo_x: integer;
-                      shuttle_y, ufo_y: integer; shuttle, ufo: pointer);
+procedure reset_ships(var shuttle_pos, ufo_pos: pointtype; shuttle, ufo: pointer);
 begin
     setfillstyle(1, black);
-    bar(shuttle_x, shuttle_y, shuttle_x + ship_width,
-        shuttle_y + shuttle_height);
-    shuttle_x:= 1;
-    shuttle_y:= getmaxy - shuttle_height;
-    putimage(shuttle_x, shuttle_y, shuttle^, xorput);
+    bar(shuttle_pos.x, shuttle_pos.y, shuttle_pos.x + ship_width,
+        shuttle_pos.y + shuttle_height);
+    shuttle_pos.x:= 1;
+    shuttle_pos.y:= getmaxy - shuttle_height;
+    putimage(shuttle_pos.x, shuttle_pos.y, shuttle^, xorput);
 
-    bar(ufo_x, ufo_y, ufo_x + ship_width, ufo_y + ufo_height);
-    ufo_x:= getmaxx - ship_width;
-    ufo_y:= 1;
-    putimage(ufo_x, ufo_y, ufo^, xorput);
+    bar(ufo_pos.x, ufo_pos.y, ufo_pos.x + ship_width, ufo_pos.y + ufo_height);
+    ufo_pos.x:= getmaxx - ship_width;
+    ufo_pos.y:= 1;
+    putimage(ufo_pos.x, ufo_pos.y, ufo^, xorput);
     setfillstyle(1, white);
 end;
 
 begin
     grdriver:= detect;
     initgraph(grdriver, grmode, 'C:\BP\BGI');
-
-    { deprecated }
-    shuttle_x:=1;
-    shuttle_y:= getmaxy - shuttle_height;
 
     shuttle_position.x:= 1;
     shuttle_position.y:= getmaxy - shuttle_height;
@@ -264,10 +258,6 @@ begin
     getimage(shuttle_position.x, shuttle_position.y,
              shuttle_position.x + ship_width,
              shuttle_position.y + shuttle_height, shuttle^);
-
-    { deprecated }
-    ufo_x:= getmaxx - ship_width;
-    ufo_y:= 1;
 
     ufo_position.x:= getmaxx - ship_width;
     ufo_position.y:= 1;
@@ -294,8 +284,7 @@ begin
                 end;
             end;
             #32: begin { SPACE }
-                reset_ships(shuttle_x, ufo_x, shuttle_y, ufo_y,
-                            shuttle, ufo);
+                reset_ships(shuttle_position, ufo_position, shuttle, ufo);
             end;
             #49: begin { 1 }
                 explode(shuttle_position, 0);
