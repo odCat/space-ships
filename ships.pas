@@ -162,11 +162,11 @@ begin
                      (ufo_x < shuttle_x - 55 + ship_width);
 end;
 
-function ufo_is_hit(projectile_x, projectile_y, ufo_x, ufo_y: integer): boolean;
+function ufo_is_hit(projectile, ufo_position: pointtype): boolean;
 begin
-    ufo_is_hit:= ((projectile_y < ufo_height) and
-                  (projectile_x > ufo_x - 55) and
-                  (projectile_x < ufo_x - 55 + ship_width));
+    ufo_is_hit:= ((projectile.y < ufo_height) and
+                  (projectile.x > ufo_position.x - 55) and
+                  (projectile.x < ufo_position.x - 55 + ship_width));
 end;
 
 procedure shuttle_fire(shuttle_pos, ufo_pos: pointtype);
@@ -185,7 +185,7 @@ begin
 
     while shuttle_pos.y > 0 do
     begin
-        if (ufo_is_hit(shuttle_pos.x, shuttle_pos.y, ufo_pos.x, ufo_pos.y)) then
+        if (ufo_is_hit(shuttle_pos, ufo_pos)) then
         begin
             explode(ufo_pos, ufo_height);
             break;
