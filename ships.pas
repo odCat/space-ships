@@ -97,6 +97,7 @@ begin
     line(shuttle.x + 55, shuttle.y + 75, shuttle.x + 55, shuttle.y + 120);
 end;
 
+{ deprecated }
 procedure draw_ufo1(x,y: integer);
 begin
     ellipse(x + 55, y + 90, 0, 180, 55, 20);
@@ -134,7 +135,7 @@ begin
          ufo_position.y + 47);
 end;
 
-procedure move_shuttle(var x: integer; y, step: integer;
+procedure move_ship(var x: integer; y, step: integer;
                        shuttle:pointer);
 begin
     if ((step > 0) and (x + step + ship_width <= getmaxx)) or
@@ -283,10 +284,10 @@ begin
                         shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y);
                     end;
                     #75: begin { LEFT ARROW }
-                        move_shuttle(shuttle_x, shuttle_y, -step, shuttle);
+                        move_ship(shuttle_x, shuttle_y, -step, shuttle);
                     end;
                     #77: begin { RIGHT ARROW }
-                        move_shuttle(shuttle_x, shuttle_y, step, shuttle);
+                        move_ship(shuttle_x, shuttle_y, step, shuttle);
                     end;
                 end;
             end;
@@ -299,10 +300,10 @@ begin
                 explode(ufo_x, ufo_y, 1);
             end;
             #97: begin { A }
-                move_shuttle(ufo_x, ufo_y, -step, ufo);
+                move_ship(ufo_x, ufo_y, -step, ufo);
             end;
             #100: begin { D }
-                move_shuttle(ufo_x, ufo_y, step, ufo);
+                move_ship(ufo_x, ufo_y, step, ufo);
             end;
             #115, #119: begin
                 ufo_fire(ufo_x, ufo_y, shuttle_x, shuttle_y);
