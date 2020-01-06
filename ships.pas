@@ -135,15 +135,14 @@ begin
          ufo_position.y + 47);
 end;
 
-procedure move_ship(var x: integer; y, step: integer;
-                       shuttle:pointer);
+procedure move_ship(var position: pointtype; step: integer; shuttle:pointer);
 begin
-    if ((step > 0) and (x + step + ship_width <= getmaxx)) or
-       ((step < 0) and (x + step >= 0)) then
+    if ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
+       ((step < 0) and (position.x + step >= 0)) then
     begin
-        putimage(x, y, shuttle^, xorput);
-        x:= x + step;
-        putimage(x, y, shuttle^, xorput);
+        putimage(position.x, position.y, shuttle^, xorput);
+        position.x:= position.x + step;
+        putimage(position.x, position.y, shuttle^, xorput);
     end;
 end;
 
@@ -210,7 +209,8 @@ begin
     dimension:= imagesize(ufo_pos.x + 55, ufo_pos.y + 63,
                           ufo_pos.x + 55, ufo_pos.y + 73);
     getmem(projectile, dimension);
-    getimage(ufo_pos.x + 55, ufo_pos.y + 63, ufo_pos.x + 55, ufo_pos.y + 73, projectile^);
+    getimage(ufo_pos.x + 55, ufo_pos.y + 63,
+             ufo_pos.x + 55, ufo_pos.y + 73, projectile^);
 
     while ufo_pos.y < getmaxy - 10 do
     begin
@@ -229,7 +229,7 @@ begin
 end;
 
 procedure reset_ships(var shuttle_x, ufo_x: integer;
-        shuttle_y, ufo_y: integer; shuttle, ufo: pointer);
+                      shuttle_y, ufo_y: integer; shuttle, ufo: pointer);
 begin
     setfillstyle(1, black);
     bar(shuttle_x, shuttle_y, shuttle_x + ship_width,
@@ -286,10 +286,10 @@ begin
                         shuttle_fire(shuttle_position, ufo_position);
                     end;
                     #75: begin { LEFT ARROW }
-                        move_ship(shuttle_x, shuttle_y, -step, shuttle);
+                        move_ship(shuttle_position, -step, shuttle);
                     end;
                     #77: begin { RIGHT ARROW }
-                        move_ship(shuttle_x, shuttle_y, step, shuttle);
+                        move_ship(shuttle_position, step, shuttle);
                     end;
                 end;
             end;
@@ -302,10 +302,10 @@ begin
                 explode(ufo_position, 1);
             end;
             #97: begin { A }
-                move_ship(ufo_x, ufo_y, -step, ufo);
+                move_ship(ufo_position, -step, ufo);
             end;
             #100: begin { D }
-                move_ship(ufo_x, ufo_y, step, ufo);
+                move_ship(ufo_position, step, ufo);
             end;
             #115, #119: begin
                 ufo_fire(ufo_position, shuttle_position);
