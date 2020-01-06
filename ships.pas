@@ -170,30 +170,31 @@ begin
                   (shuttle_x < ufo_x - 55 + ship_width));
 end;
 
-procedure shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y: integer);
+procedure shuttle_fire(shuttle_pos, ufo_pos: pointtype);
 var
     dimension: word;
     projectile: pointer;
 begin
     setcolor(lightred);
-    line(shuttle_x + 55, shuttle_y - 1, shuttle_x + 55, shuttle_y - 11);
-    dimension:= imagesize(shuttle_x + 55, shuttle_y - 1,
-                          shuttle_x + 55, shuttle_y - 11);
+    line(shuttle_pos.x + 55, shuttle_pos.y - 1,
+         shuttle_pos.x + 55, shuttle_pos.y - 11);
+    dimension:= imagesize(shuttle_pos.x + 55, shuttle_pos.y - 1,
+                          shuttle_pos.x + 55, shuttle_pos.y - 11);
     getmem(projectile, dimension);
-    getimage(shuttle_x + 55, shuttle_y - 1, shuttle_x + 55, shuttle_y - 11,
-             projectile^);
+    getimage(shuttle_pos.x + 55, shuttle_pos.y - 1,
+             shuttle_pos.x + 55, shuttle_pos.y - 11, projectile^);
 
-    while shuttle_y > 0 do
+    while shuttle_pos.y > 0 do
     begin
-        if (ufo_is_hit(shuttle_x, shuttle_y, ufo_x, ufo_y)) then
+        if (ufo_is_hit(shuttle_pos.x, shuttle_pos.y, ufo_pos.x, ufo_pos.y)) then
         begin
-            explode(ufo_x, ufo_y, ufo_height);
+            explode(ufo_pos.x, ufo_pos.y, ufo_height);
             break;
         end;
 
-        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
-        shuttle_y:= shuttle_y - 10;
-        putimage(shuttle_x + 55, shuttle_y - 11, projectile^, xorput);
+        putimage(shuttle_pos.x + 55, shuttle_pos.y - 11, projectile^, xorput);
+        shuttle_pos.y:= shuttle_pos.y - 10;
+        putimage(shuttle_pos.x + 55, shuttle_pos.y - 11, projectile^, xorput);
         delay(100);
     end;
     setcolor(white);
@@ -281,7 +282,7 @@ begin
                 key_code:= readkey;
                 case key_code of
                     #72: begin { UP ARROW }
-                        shuttle_fire(shuttle_x, shuttle_y, ufo_x, ufo_y);
+                        shuttle_fire(shuttle_position, ufo_position);
                     end;
                     #75: begin { LEFT ARROW }
                         move_ship(shuttle_x, shuttle_y, -step, shuttle);
