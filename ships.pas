@@ -81,6 +81,29 @@ begin
     rectangle(corner.x + 70, corner.y + 110, corner.x + 110, corner.y + 120);
 end;
 
+procedure draw_shuttle_body(corner: pointtype);
+var
+    temp: tripoints;
+begin
+    rectangle(corner.x + 40, corner.y + 30, corner.x + 70, corner.y + 120);
+
+    temp[0].x:= corner.x + 40;
+    temp[0].y:= corner.y + 30;
+    temp[1].x:= corner.x + 35;
+    temp[1].y:= corner.y + 120;
+    temp[2].x:= corner.x + 40;
+    temp[2].y:= corner.y + 120;
+    drawpoly(3, temp);
+    
+    temp[0].x:= corner.x + 70;
+    temp[0].y:= corner.y + 30;
+    temp[1].x:= corner.x + 75;
+    temp[1].y:= corner.y + 120;
+    temp[2].x:= corner.x + 70;
+    temp[2].y:= corner.y + 120;
+    drawpoly(3, temp);
+end;
+
 procedure draw_shuttle(shuttle: pointtype);
 var
     temp: tripoints;
@@ -91,24 +114,7 @@ begin
 
     draw_shuttle_right_wing(shuttle);
 
-    { body }
-    rectangle(shuttle.x + 40, shuttle.y + 30, shuttle.x + 70, shuttle.y + 120);
-
-    temp[0].x:= shuttle.x + 40;
-    temp[0].y:= shuttle.y + 30;
-    temp[1].x:= shuttle.x + 35;
-    temp[1].y:= shuttle.y + 120;
-    temp[2].x:= shuttle.x + 40;
-    temp[2].y:= shuttle.y + 120;
-    drawpoly(3, temp);
-    
-    temp[0].x:= shuttle.x + 70;
-    temp[0].y:= shuttle.y + 30;
-    temp[1].x:= shuttle.x + 75;
-    temp[1].y:= shuttle.y + 120;
-    temp[2].x:= shuttle.x + 70;
-    temp[2].y:= shuttle.y + 120;
-    drawpoly(3, temp);
+    draw_shuttle_body(shuttle);
 
     { tail }
     line(shuttle.x + 55, shuttle.y + 75, shuttle.x + 55, shuttle.y + 120);
