@@ -128,7 +128,7 @@ begin
     if ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
        ((step < 0) and (position.x + step >= 0)) then
     begin
-        putimage(position.x, position.y, ship^, xorput);
+        delete_ship(position, ship_height);
         position.x:= position.x + step;
         putimage(position.x, position.y, ship^, xorput);
     end;
