@@ -70,15 +70,15 @@ procedure draw_shuttle_right_wing(corner: pointtype);
 var
     temp: tripoints;
 begin
-    temp[0].x:= shuttle.x + 70;
-    temp[0].y:= shuttle.y + 75;
-    temp[1].x:= shuttle.x + 110;
-    temp[1].y:= shuttle.y + 110;
-    temp[2].x:= shuttle.x + 70;
-    temp[2].y:= shuttle.y + 110;
+    temp[0].x:= corner.x + 70;
+    temp[0].y:= corner.y + 75;
+    temp[1].x:= corner.x + 110;
+    temp[1].y:= corner.y + 110;
+    temp[2].x:= corner.x + 70;
+    temp[2].y:= corner.y + 110;
     drawpoly(3, temp);
 
-    rectangle(shuttle.x + 70, shuttle.y + 110, shuttle.x + 110, shuttle.y + 120);
+    rectangle(corner.x + 70, corner.y + 110, corner.x + 110, corner.y + 120);
 end;
 
 procedure draw_shuttle(shuttle: pointtype);
