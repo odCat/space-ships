@@ -33,23 +33,29 @@ var
     shuttle, ufo: pointer;
     key_code: char;
 
+procedure draw_shuttle_tip(corner: pointtype);
+var
+    temp: tripoints;
+begin
+    temp[0].x:= corner.x + 40;
+    temp[0].y:= corner.y + 30;
+    temp[1].x:= corner.x + 55;
+    temp[1].y:= corner.y;
+    temp[2].x:= corner.x + 70;
+    temp[2].y:= corner.y + 30;
+    drawpoly(3, temp);
+
+    temp[1].y:= corner.y + 10;
+    drawpoly(3, temp);
+    temp[1].y:= corner.y + 17;
+    drawpoly(3, temp);
+end;
+
 procedure draw_shuttle(shuttle: pointtype);
 var
     temp: tripoints;
 begin
-    { tip }
-    temp[0].x:= shuttle.x + 40;
-    temp[0].y:= shuttle.y + 30;
-    temp[1].x:= shuttle.x + 55;
-    temp[1].y:= shuttle.y;
-    temp[2].x:= shuttle.x + 70;
-    temp[2].y:= shuttle.y + 30;
-    drawpoly(3, temp);
-
-    temp[1].y:= shuttle.y + 10;
-    drawpoly(3, temp);
-    temp[1].y:= shuttle.y + 17;
-    drawpoly(3, temp);
+    draw_shuttle_tip(shuttle);
 
     { left wing }
     temp[0].x:= shuttle.x;
