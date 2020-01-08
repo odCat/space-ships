@@ -115,6 +115,13 @@ begin
          ufo_position.x + 110, ufo_position.y + 47);
 end;
 
+procedure delete_ship(position: pointtype; height: integer);
+begin
+    setfillstyle(1, black);
+    bar(position.x, position.y, position.x + ship_width, position.y + height);
+    setfillstyle(1, white);
+end;
+
 procedure move_ship(var position: pointtype; step: integer; shuttle:pointer);
 begin
     if ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
@@ -129,10 +136,8 @@ end;
 procedure explode(position: pointtype; ship_height: integer);
 begin
     bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
-    delay(100);
-    setfillstyle(1, black);
-    bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
-    setfillstyle(1, white);
+    delay(150);
+    delete_ship(position, ship_height);
 end;
 
 function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
