@@ -122,14 +122,15 @@ begin
     setfillstyle(1, white);
 end;
 
-procedure move_ship(var position: pointtype; step: integer; shuttle:pointer);
+procedure move_ship(var position: pointtype; ship_height, step: integer;
+                    ship:pointer);
 begin
     if ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
        ((step < 0) and (position.x + step >= 0)) then
     begin
-        putimage(position.x, position.y, shuttle^, xorput);
+        putimage(position.x, position.y, ship^, xorput);
         position.x:= position.x + step;
-        putimage(position.x, position.y, shuttle^, xorput);
+        putimage(position.x, position.y, ship^, xorput);
     end;
 end;
 
@@ -262,10 +263,10 @@ begin
                         shuttle_fire(shuttle_position, ufo_position);
                     end;
                     #75: begin { LEFT ARROW }
-                        move_ship(shuttle_position, -step, shuttle);
+                        move_ship(shuttle_position, shuttle_height, -step, shuttle);
                     end;
                     #77: begin { RIGHT ARROW }
-                        move_ship(shuttle_position, step, shuttle);
+                        move_ship(shuttle_position, shuttle_height, step, shuttle);
                     end;
                 end;
             end;
@@ -277,10 +278,10 @@ begin
                 explode(ufo_position, 1);
             end;
             #97: begin { A }
-                move_ship(ufo_position, -step, ufo);
+                move_ship(ufo_position, ufo_height, -step, ufo);
             end;
             #100: begin { D }
-                move_ship(ufo_position, step, ufo);
+                move_ship(ufo_position, ufo_height, step, ufo);
             end;
             #115, #119: begin
                 ufo_fire(ufo_position, shuttle_position);
