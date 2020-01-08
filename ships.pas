@@ -104,20 +104,20 @@ begin
     drawpoly(3, temp);
 end;
 
-procedure draw_shuttle(shuttle: pointtype);
+procedure draw_shuttle_tail(corner: pointtype);
 var
     temp: tripoints;
 begin
+    line(corner.x + 55, corner.y + 75, corner.x + 55, corner.y + 120);
+end;
+
+procedure draw_shuttle(shuttle: pointtype);
+begin
     draw_shuttle_tip(shuttle);
-
     draw_shuttle_left_wing(shuttle);
-
     draw_shuttle_right_wing(shuttle);
-
     draw_shuttle_body(shuttle);
-
-    { tail }
-    line(shuttle.x + 55, shuttle.y + 75, shuttle.x + 55, shuttle.y + 120);
+    draw_shuttle_tail(shuttle);
 end;
 
 procedure draw_ufo(ufo_position: pointtype);
