@@ -122,11 +122,15 @@ begin
     setfillstyle(1, white);
 end;
 
+function ship_can_move(position: pointtype; step: integer): boolean;
+begin
+    ship_can_move:= ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
+                    ((step < 0) and (position.x + step >= 0));
+end;
 procedure move_ship(var position: pointtype; ship_height, step: integer;
                     ship:pointer);
 begin
-    if ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
-       ((step < 0) and (position.x + step >= 0)) then
+    if (ship_can_move(position, step)) then
     begin
         delete_ship(position, ship_height);
         position.x:= position.x + step;
