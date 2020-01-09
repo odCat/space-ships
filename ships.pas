@@ -59,7 +59,7 @@ begin
     temp[0].y:= corner.y + 110;
     temp[1].x:= corner.x + 40;
     temp[1].y:= corner.y + 75;
-    temp[2].x:= corner.x + 40; { why donesn't print this vertex }
+    temp[2].x:= corner.x + 40;
     temp[2].y:= corner.y + 110;
     drawpoly(3, temp);
 
