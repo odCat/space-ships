@@ -27,11 +27,18 @@ const
     shuttle_height = 120;
     ufo_height = 63;
 var
-    grdriver, grmode: integer;
     shuttle_position, ufo_position: pointtype;
     dimension: word;
     shuttle, ufo: pointer;
     key_code: char;
+
+procedure init_graph;
+var
+    grdriver, grmode: integer;
+begin
+    grdriver:= detect;
+    initgraph(grdriver, grmode, 'C:\BP\BGI');
+end;
 
 procedure draw_shuttle_tip(corner: pointtype);
 var
@@ -259,8 +266,7 @@ begin
 end;
 
 begin
-    grdriver:= detect;
-    initgraph(grdriver, grmode, 'C:\BP\BGI');
+    init_graph;
 
     shuttle_position.x:= 1;
     shuttle_position.y:= getmaxy - shuttle_height;
