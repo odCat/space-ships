@@ -7,3 +7,9 @@ in primary school.
 
 It is dedicated to my teachers and my pair programming colleague
 at the time.
+
+## TODO
+* Find if threading can be added to the application. I don't think
+Pascal support it natively
+* Move the ships & graphic methods to a library
+* Add screenshots to the README
