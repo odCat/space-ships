@@ -28,7 +28,7 @@ const
     ufo_height = 63;
 var
     shuttle_position, ufo_position: pointtype;
-    dimension: word;
+    shuttle_size, ufo_size: word;
     shuttle, ufo: pointer;
     key_code: char;
 
@@ -271,11 +271,11 @@ begin
     shuttle_position.x:= 1;
     shuttle_position.y:= getmaxy - shuttle_height;
     draw_shuttle(shuttle_position);
-    dimension:= imagesize(shuttle_position.x, shuttle_position.y,
-                          shuttle_position.x + ship_width,
-                          shuttle_position.y + shuttle_height);
+    shuttle_size:= imagesize(shuttle_position.x, shuttle_position.y,
+                             shuttle_position.x + ship_width,
+                             shuttle_position.y + shuttle_height);
 
-    getmem(shuttle, dimension);
+    getmem(shuttle, shuttle_size);
     getimage(shuttle_position.x, shuttle_position.y,
              shuttle_position.x + ship_width,
              shuttle_position.y + shuttle_height, shuttle^);
@@ -283,7 +283,10 @@ begin
     ufo_position.x:= getmaxx - ship_width;
     ufo_position.y:= 1;
     draw_ufo(ufo_position);
-    getmem(ufo, dimension);
+    ufo_size:= imagesize(ufo_position.x, ufo_position.y,
+                         ufo_position.x + ship_width,
+                         ufo_position.y + ufo_height);
+    getmem(ufo, ufo_size);
     getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
              ufo_position.y + ufo_height, ufo^);
 
