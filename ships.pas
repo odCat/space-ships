@@ -326,5 +326,7 @@ begin
         end;
     until key_code = #27; { ESCAPE }
 
+    freemem(shuttle, shuttle_size);
+    freemem(ufo, ufo_size);
     closegraph;
 end.
