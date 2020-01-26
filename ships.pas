@@ -176,6 +176,10 @@ begin
     delete_ship(position, ship_height);
 end;
 
+procedure generate_wheel_from_random_lines;
+begin
+end;
+
 function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
 begin
     shuttle_is_hit:= (projectile.y > getmaxy - shuttle_height)
