@@ -176,6 +176,10 @@ begin
     delete_ship(position, ship_height);
 end;
 
+procedure find_center;
+begin
+end;
+
 procedure generate_wheel_from_random_lines;
 begin
 end;
