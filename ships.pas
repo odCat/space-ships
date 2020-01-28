@@ -180,6 +180,10 @@ procedure find_center;
 begin
 end;
 
+procedure find_radius;
+begin
+end;
+
 procedure generate_wheel_from_random_lines;
 begin
 end;
