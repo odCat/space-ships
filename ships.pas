@@ -169,15 +169,11 @@ begin
     end;
 end;
 
-procedure explode(position: pointtype; ship_height: integer);
+procedure find_center(corner: pointtype; ship_height: integer;
+                      var center: pointtype);
 begin
-    bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
-    delay(150);
-    delete_ship(position, ship_height);
-end;
-
-procedure find_center;
-begin
+    center.x:= corner.x + ship_width div 2;
+    center.y:= corner.y + ship_height div 2;
 end;
 
 procedure find_radius;
@@ -186,6 +182,13 @@ end;
 
 procedure generate_wheel_from_random_lines;
 begin
+end;
+
+procedure explode(position: pointtype; ship_height: integer);
+begin
+    bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
+    delay(150);
+    delete_ship(position, ship_height);
 end;
 
 function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
