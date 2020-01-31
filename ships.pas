@@ -176,8 +176,10 @@ begin
     center.y:= corner.y + ship_height div 2;
 end;
 
-procedure find_radius;
+function find_radius(corner: pointtype; ship_height: integer): integer;
+var radius: integer;
 begin
+    find_radius:= radius;
 end;
 
 procedure generate_wheel_from_random_lines;
