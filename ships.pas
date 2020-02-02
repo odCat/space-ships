@@ -177,7 +177,6 @@ begin
 end;
 
 function find_radius(corner: pointtype; ship_height: integer): integer;
-var radius: integer;
 begin
     find_radius:= trunc(sqrt(sqr(corner.x - ship_width div 2) +
                              sqr(corner.y - ship_height div 2)));
