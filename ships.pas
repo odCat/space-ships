@@ -182,6 +182,13 @@ begin
                              sqr(corner.y - ship_height div 2)));
 end;
 
+procedure get_point_on_circle_from_angle(center: pointtype; radius:integer; angle: real;
+    var point_on_circle: pointtype);
+begin
+    point_on_circle.x:= center.x + radius * trunc(cos(angle));
+    point_on_circle.y:= center.y - radius * trunc(sin(angle));
+end;
+
 procedure generate_wheel_from_random_lines(corner: pointtype; ship_height: integer);
 var
     center: pointtype;
