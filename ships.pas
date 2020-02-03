@@ -182,8 +182,18 @@ begin
                              sqr(corner.y - ship_height div 2)));
 end;
 
-procedure generate_wheel_from_random_lines;
+procedure generate_wheel_from_random_lines(corner: pointtype; ship_height: integer);
+var
+    center: pointtype;
+    i, radius: integer;
 begin
+    find_center(corner, ship_height, center);
+    radius:= find_radius(corner, ship_height);
+    randomize;
+    for i:=0 to 100 do
+    begin
+
+    end;
 end;
 
 procedure explode(position: pointtype; ship_height: integer);
