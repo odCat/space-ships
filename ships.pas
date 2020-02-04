@@ -178,8 +178,8 @@ end;
 
 function find_radius(corner: pointtype; ship_height: integer): integer;
 begin
-    find_radius:= trunc(sqrt(sqr((ship_width div 2) - corner.x) +
-                             sqr((ship_height div 2) - corner.y)));
+    find_radius:= trunc(sqrt(sqr(ship_width div 2 ) +
+                             sqr(ship_height div 2)));
 end;
 
 procedure explosion(center:pointtype; radius: integer);
