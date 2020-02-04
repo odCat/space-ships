@@ -178,15 +178,8 @@ end;
 
 function find_radius(corner: pointtype; ship_height: integer): integer;
 begin
-    find_radius:= trunc(sqrt(sqr(corner.x + (ship_width div 2)) +
-                             sqr(corner.y - (ship_height div 2))));
-end;
-
-procedure get_point_on_circle_from_angle(center: pointtype; radius:integer; angle: real;
-    var point_on_circle: pointtype);
-begin
-    point_on_circle.x:= center.x + radius * trunc(cos(angle));
-    point_on_circle.y:= center.y - radius * trunc(sin(angle));
+    find_radius:= trunc(sqrt(sqr((ship_width div 2) - corner.x) +
+                             sqr((ship_height div 2) - corner.y)));
 end;
 
 procedure explosion(center:pointtype; radius: integer);
