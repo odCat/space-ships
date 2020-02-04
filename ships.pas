@@ -189,21 +189,6 @@ begin
     point_on_circle.y:= center.y - radius * trunc(sin(angle));
 end;
 
-procedure generate_wheel_from_random_lines(corner: pointtype; ship_height: integer);
-var
-    center, point_on_circle: pointtype;
-    i, radius: integer;
-begin
-    find_center(corner, ship_height, center);
-    radius:= find_radius(corner, ship_height);
-    randomize;
-    for i:= 0 to 100 do
-    begin
-        get_point_on_circle_from_angle(center, radius, random(360), point_on_circle);
-        line(center.x, center.y, point_on_circle.x, point_on_circle.y);
-    end;
-end;
-
 procedure explosion(center:pointtype; radius: integer);
 begin
     fillellipse(center.x, center.y, radius, radius);
