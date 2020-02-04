@@ -204,7 +204,7 @@ begin
     end;
 end;
 
-procedure explode(position: pointtype; ship_height: integer);
+procedure destroy_ship(position: pointtype; ship_height: integer);
 begin
     bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
     {
@@ -246,7 +246,7 @@ begin
     begin
         if (ufo_is_hit(shuttle_pos, ufo_pos)) then
         begin
-            explode(ufo_pos, ufo_height);
+            destroy_ship(ufo_pos, ufo_height);
             break;
         end;
 
@@ -275,7 +275,7 @@ begin
     begin
         if (shuttle_is_hit(shuttle_pos, ufo_pos)) then
         begin
-            explode(shuttle_pos, shuttle_height);
+            destroy_ship(shuttle_pos, shuttle_height);
             break;
         end;
 
@@ -349,8 +349,8 @@ begin
                 reset_ships(shuttle_position, ufo_position, shuttle, ufo);
             end;
             #49: begin { 1 }
-                explode(shuttle_position, 0);
-                explode(ufo_position, 1);
+                destroy_ship(shuttle_position, 0);
+                destroy_ship(ufo_position, 1);
             end;
             #97: begin { A }
                 move_ship(ufo_position, ufo_height, -step, ufo);
