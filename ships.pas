@@ -178,8 +178,8 @@ end;
 
 function find_radius(corner: pointtype; ship_height: integer): integer;
 begin
-    find_radius:= trunc(sqrt(sqr(corner.x - ship_width div 2) +
-                             sqr(corner.y - ship_height div 2)));
+    find_radius:= trunc(sqrt(sqr(corner.x + (ship_width div 2)) +
+                             sqr(corner.y - (ship_height div 2))));
 end;
 
 procedure get_point_on_circle_from_angle(center: pointtype; radius:integer; angle: real;
@@ -191,21 +191,25 @@ end;
 
 procedure generate_wheel_from_random_lines(corner: pointtype; ship_height: integer);
 var
-    center: pointtype;
+    center, point_on_circle: pointtype;
     i, radius: integer;
 begin
     find_center(corner, ship_height, center);
     radius:= find_radius(corner, ship_height);
     randomize;
-    for i:=0 to 100 do
+    for i:= 0 to 100 do
     begin
-
+        get_point_on_circle_from_angle(center, radius, random(360), point_on_circle);
+        line(center.x, center.y, point_on_circle.x, point_on_circle.y);
     end;
 end;
 
 procedure explode(position: pointtype; ship_height: integer);
 begin
     bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
+    {
+    generate_wheel_from_random_lines(position, ship_height);
+    }
     delay(150);
     delete_ship(position, ship_height);
 end;
