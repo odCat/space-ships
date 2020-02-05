@@ -192,11 +192,6 @@ var
     center: pointtype;
     radius: integer;
 begin
-    {
-    bar(position.x, position.y, position.x + ship_width, position.y + ship_height);
-    {
-    generate_wheel_from_random_lines(position, ship_height);
-    }
     find_center(position, ship_height, center);
     radius:= find_radius(position, ship_height);
     explosion(center, radius);
