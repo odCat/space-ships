@@ -206,7 +206,7 @@ begin
 
     setcolor(black);
     setfillstyle(1, black);
-    explosion(center, radius);
+    explosion(center, radius + 1);
     setfillstyle(1, white);
 end;
 
