@@ -194,13 +194,18 @@ var
 begin
     find_center(position, ship_height, center);
     radius:= find_radius(position, ship_height);
+
     explosion(center, radius div 3);
     delay(500);
     explosion(center, round(radius/2/3));
     delay(500);
     explosion(center, radius);
     delay(500);
-    delete_ship(position, ship_height);
+
+    setcolor(black);
+    setfillstyle(1, black);
+    explosion(center, radius);
+    setfillstyle(1, white);
 end;
 
 function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
