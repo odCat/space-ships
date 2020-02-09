@@ -195,9 +195,11 @@ begin
     find_center(position, ship_height, center);
     radius:= find_radius(position, ship_height);
 
-    explosion(center, radius div 3);
+    explosion(center, round(radius/4));
     delay(500);
-    explosion(center, round(radius/2/3));
+    explosion(center, round(radius/2));
+    delay(500);
+    explosion(center, round(radius/3/4));
     delay(500);
     explosion(center, radius);
     delay(500);
