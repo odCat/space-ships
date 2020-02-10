@@ -224,6 +224,10 @@ begin
                   (projectile.x < ufo_position.x - 55 + ship_width));
 end;
 
+procedure game_over;
+begin
+end;
+
 procedure shuttle_fire(shuttle_pos, ufo_pos: pointtype);
 var
     dimension: word;
@@ -243,6 +247,7 @@ begin
         if (ufo_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(ufo_pos, ufo_height);
+            game_over;
             break;
         end;
 
@@ -272,6 +277,7 @@ begin
         if (shuttle_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(shuttle_pos, shuttle_height);
+            game_over;
             break;
         end;
 
