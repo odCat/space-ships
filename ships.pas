@@ -226,6 +226,8 @@ end;
 
 procedure game_over;
 begin
+    delay(2000);
+    key_code:= #27;
 end;
 
 procedure shuttle_fire(shuttle_pos, ufo_pos: pointtype);
