@@ -349,20 +349,13 @@ begin
                     end;
                 end;
             end;
-            #32: begin { SPACE }
-                reset_ships(shuttle_position, ufo_position, shuttle, ufo);
-            end;
-            #49: begin { 1 }
-                destroy_ship(shuttle_position, 0);
-                destroy_ship(ufo_position, 1);
-            end;
             #97: begin { A }
                 move_ship(ufo_position, ufo_height, -step, ufo);
             end;
             #100: begin { D }
                 move_ship(ufo_position, ufo_height, step, ufo);
             end;
-            #115, #119: begin
+            #115, #119: begin { S, W }
                 ufo_fire(ufo_position, shuttle_position);
             end;
         end;
