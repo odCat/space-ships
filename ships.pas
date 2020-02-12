@@ -54,6 +54,7 @@ begin
 
     temp[1].y:= corner.y + 10;
     drawpoly(3, temp);
+
     temp[1].y:= corner.y + 17;
     drawpoly(3, temp);
 end;
@@ -132,6 +133,7 @@ begin
     ellipse(ufo_position.x + 55, ufo_position.y + 27, 0, 180, 27, 27);
     rectangle(ufo_position.x + 28, ufo_position.y + 27,
               ufo_position.x + 83, ufo_position.y + 32);
+
     line(ufo_position.x, ufo_position.y + 47,
          ufo_position.x + 28, ufo_position.y + 32);
     line(ufo_position.x, ufo_position.y + 47,
@@ -291,6 +293,7 @@ begin
     setcolor(white);
 end;
 
+{ TODO Delete this procedure }
 procedure reset_ships(var shuttle_pos, ufo_pos: pointtype; shuttle, ufo: pointer);
 begin
     setfillstyle(1, black);
@@ -328,6 +331,7 @@ begin
     ufo_size:= imagesize(ufo_position.x, ufo_position.y,
                          ufo_position.x + ship_width,
                          ufo_position.y + ufo_height);
+
     getmem(ufo, ufo_size);
     getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
              ufo_position.y + ufo_height, ufo^);
