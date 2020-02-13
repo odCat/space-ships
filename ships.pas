@@ -293,23 +293,6 @@ begin
     setcolor(white);
 end;
 
-{ TODO Delete this procedure }
-procedure reset_ships(var shuttle_pos, ufo_pos: pointtype; shuttle, ufo: pointer);
-begin
-    setfillstyle(1, black);
-    bar(shuttle_pos.x, shuttle_pos.y, shuttle_pos.x + ship_width,
-        shuttle_pos.y + shuttle_height);
-    shuttle_pos.x:= 1;
-    shuttle_pos.y:= getmaxy - shuttle_height;
-    putimage(shuttle_pos.x, shuttle_pos.y, shuttle^, xorput);
-
-    bar(ufo_pos.x, ufo_pos.y, ufo_pos.x + ship_width, ufo_pos.y + ufo_height);
-    ufo_pos.x:= getmaxx - ship_width;
-    ufo_pos.y:= 1;
-    putimage(ufo_pos.x, ufo_pos.y, ufo^, xorput);
-    setfillstyle(1, white);
-end;
-
 begin
     init_graph;
 
