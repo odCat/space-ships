@@ -189,6 +189,10 @@ begin
     fillellipse(center.x, center.y, radius, radius);
 end;
 
+procedure close_graph_mode;
+begin
+end;
+
 procedure destroy_ship(position: pointtype; ship_height: integer);
 var
     center: pointtype;
