@@ -191,6 +191,9 @@ end;
 
 procedure close_graph_mode;
 begin
+    freemem(shuttle, shuttle_size);
+    freemem(ufo, ufo_size);
+    closegraph;
 end;
 
 procedure destroy_ship(position: pointtype; ship_height: integer);
@@ -352,7 +355,5 @@ begin
         end;
     until key_code = #27; { ESCAPE }
 
-    freemem(shuttle, shuttle_size);
-    freemem(ufo, ufo_size);
-    closegraph;
+    close_graph_mode;
 end.
