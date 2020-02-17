@@ -233,7 +233,7 @@ begin
                   (projectile.x < ufo_position.x - 55 + ship_width));
 end;
 
-procedure game_over;
+procedure wait_and_exit;
 begin
     delay(2000);
     key_code:= #27;
@@ -258,7 +258,7 @@ begin
         if (ufo_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(ufo_pos, ufo_height);
-            game_over;
+            wait_and_exit;
             break;
         end;
 
@@ -288,7 +288,7 @@ begin
         if (shuttle_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(shuttle_pos, shuttle_height);
-            game_over;
+            wait_and_exit;
             break;
         end;
 
