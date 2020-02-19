@@ -189,13 +189,6 @@ begin
     fillellipse(center.x, center.y, radius, radius);
 end;
 
-procedure close_graph_mode;
-begin
-    freemem(shuttle, shuttle_size);
-    freemem(ufo, ufo_size);
-    closegraph;
-end;
-
 procedure destroy_ship(position: pointtype; ship_height: integer);
 var
     center: pointtype;
@@ -298,6 +291,13 @@ begin
         delay(100);
     end;
     setcolor(white);
+end;
+
+procedure close_graph_mode;
+begin
+    freemem(shuttle, shuttle_size);
+    freemem(ufo, ufo_size);
+    closegraph;
 end;
 
 begin
