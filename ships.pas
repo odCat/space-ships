@@ -293,6 +293,10 @@ begin
     setcolor(white);
 end;
 
+procedure print_game_over;
+begin
+end;
+
 procedure close_graph_mode;
 begin
     freemem(shuttle, shuttle_size);
