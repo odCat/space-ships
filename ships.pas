@@ -293,15 +293,19 @@ begin
     setcolor(white);
 end;
 
-procedure print_game_over;
-begin
-end;
-
 procedure close_graph_mode;
 begin
     freemem(shuttle, shuttle_size);
     freemem(ufo, ufo_size);
     closegraph;
+end;
+
+procedure print_game_over;
+begin
+    clrscr;
+    gotoxy(32,12);
+    write('*** GAME OVER ***');
+    readln;
 end;
 
 begin
@@ -360,4 +364,5 @@ begin
     until key_code = #27; { ESCAPE }
 
     close_graph_mode;
+    print_game_over;
 end.
