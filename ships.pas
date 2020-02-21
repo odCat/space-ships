@@ -293,6 +293,10 @@ begin
     setcolor(white);
 end;
 
+procedure handle_input;
+begin
+end;
+
 procedure close_graph_mode;
 begin
     freemem(shuttle, shuttle_size);
@@ -334,6 +338,7 @@ begin
     getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
              ufo_position.y + ufo_height, ufo^);
 
+     handle_input;
     repeat
         key_code:= readkey;
         case key_code of
