@@ -295,6 +295,28 @@ end;
 
 procedure init_ships;
 begin
+    shuttle_position.x:= 1;
+    shuttle_position.y:= getmaxy - shuttle_height;
+    draw_shuttle(shuttle_position);
+    shuttle_size:= imagesize(shuttle_position.x, shuttle_position.y,
+                             shuttle_position.x + ship_width,
+                             shuttle_position.y + shuttle_height);
+
+    getmem(shuttle, shuttle_size);
+    getimage(shuttle_position.x, shuttle_position.y,
+             shuttle_position.x + ship_width,
+             shuttle_position.y + shuttle_height, shuttle^);
+
+    ufo_position.x:= getmaxx - ship_width;
+    ufo_position.y:= 1;
+    draw_ufo(ufo_position);
+    ufo_size:= imagesize(ufo_position.x, ufo_position.y,
+                         ufo_position.x + ship_width,
+                         ufo_position.y + ufo_height);
+
+    getmem(ufo, ufo_size);
+    getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
+             ufo_position.y + ufo_height, ufo^);
 end;
 
 procedure handle_input;
@@ -348,28 +370,6 @@ begin
     init_graph;
 
     init_ships;
-    shuttle_position.x:= 1;
-    shuttle_position.y:= getmaxy - shuttle_height;
-    draw_shuttle(shuttle_position);
-    shuttle_size:= imagesize(shuttle_position.x, shuttle_position.y,
-                             shuttle_position.x + ship_width,
-                             shuttle_position.y + shuttle_height);
-
-    getmem(shuttle, shuttle_size);
-    getimage(shuttle_position.x, shuttle_position.y,
-             shuttle_position.x + ship_width,
-             shuttle_position.y + shuttle_height, shuttle^);
-
-    ufo_position.x:= getmaxx - ship_width;
-    ufo_position.y:= 1;
-    draw_ufo(ufo_position);
-    ufo_size:= imagesize(ufo_position.x, ufo_position.y,
-                         ufo_position.x + ship_width,
-                         ufo_position.y + ufo_height);
-
-    getmem(ufo, ufo_size);
-    getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
-             ufo_position.y + ufo_height, ufo^);
 
     handle_input;
 
