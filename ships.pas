@@ -295,6 +295,34 @@ end;
 
 procedure handle_input;
 begin
+    repeat
+        key_code:= readkey;
+        case key_code of
+            #0: begin
+                key_code:= readkey;
+                case key_code of
+                    #72: begin { UP ARROW }
+                        shuttle_fire(shuttle_position, ufo_position);
+                    end;
+                    #75: begin { LEFT ARROW }
+                        move_ship(shuttle_position, shuttle_height, -step, shuttle);
+                    end;
+                    #77: begin { RIGHT ARROW }
+                        move_ship(shuttle_position, shuttle_height, step, shuttle);
+                    end;
+                end;
+            end;
+            #97: begin { A }
+                move_ship(ufo_position, ufo_height, -step, ufo);
+            end;
+            #100: begin { D }
+                move_ship(ufo_position, ufo_height, step, ufo);
+            end;
+            #115, #119: begin { S, W }
+                ufo_fire(ufo_position, shuttle_position);
+            end;
+        end;
+    until key_code = #27; { ESCAPE }
 end;
 
 procedure close_graph_mode;
@@ -338,35 +366,7 @@ begin
     getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
              ufo_position.y + ufo_height, ufo^);
 
-     handle_input;
-    repeat
-        key_code:= readkey;
-        case key_code of
-            #0: begin
-                key_code:= readkey;
-                case key_code of
-                    #72: begin { UP ARROW }
-                        shuttle_fire(shuttle_position, ufo_position);
-                    end;
-                    #75: begin { LEFT ARROW }
-                        move_ship(shuttle_position, shuttle_height, -step, shuttle);
-                    end;
-                    #77: begin { RIGHT ARROW }
-                        move_ship(shuttle_position, shuttle_height, step, shuttle);
-                    end;
-                end;
-            end;
-            #97: begin { A }
-                move_ship(ufo_position, ufo_height, -step, ufo);
-            end;
-            #100: begin { D }
-                move_ship(ufo_position, ufo_height, step, ufo);
-            end;
-            #115, #119: begin { S, W }
-                ufo_fire(ufo_position, shuttle_position);
-            end;
-        end;
-    until key_code = #27; { ESCAPE }
+    handle_input;
 
     close_graph_mode;
     print_game_over;
