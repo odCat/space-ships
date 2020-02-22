@@ -293,6 +293,10 @@ begin
     setcolor(white);
 end;
 
+procedure init_ships;
+begin
+end;
+
 procedure handle_input;
 begin
     repeat
@@ -343,6 +347,7 @@ end;
 begin
     init_graph;
 
+    init_ships;
     shuttle_position.x:= 1;
     shuttle_position.y:= getmaxy - shuttle_height;
     draw_shuttle(shuttle_position);
