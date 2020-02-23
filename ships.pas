@@ -148,6 +148,32 @@ begin
          ufo_position.x + 110, ufo_position.y + 47);
 end;
 
+procedure init_ships;
+begin
+    shuttle_position.x:= 1;
+    shuttle_position.y:= getmaxy - shuttle_height;
+    draw_shuttle(shuttle_position);
+    shuttle_size:= imagesize(shuttle_position.x, shuttle_position.y,
+                             shuttle_position.x + ship_width,
+                             shuttle_position.y + shuttle_height);
+
+    getmem(shuttle, shuttle_size);
+    getimage(shuttle_position.x, shuttle_position.y,
+             shuttle_position.x + ship_width,
+             shuttle_position.y + shuttle_height, shuttle^);
+
+    ufo_position.x:= getmaxx - ship_width;
+    ufo_position.y:= 1;
+    draw_ufo(ufo_position);
+    ufo_size:= imagesize(ufo_position.x, ufo_position.y,
+                         ufo_position.x + ship_width,
+                         ufo_position.y + ufo_height);
+
+    getmem(ufo, ufo_size);
+    getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
+             ufo_position.y + ufo_height, ufo^);
+end;
+
 procedure delete_ship(position: pointtype; height: integer);
 begin
     setfillstyle(1, black);
@@ -160,6 +186,7 @@ begin
     ship_can_move:= ((step > 0) and (position.x + step + ship_width <= getmaxx)) or
                     ((step < 0) and (position.x + step >= 0));
 end;
+
 procedure move_ship(var position: pointtype; ship_height, step: integer;
                     ship:pointer);
 begin
@@ -169,6 +196,20 @@ begin
         position.x:= position.x + step;
         putimage(position.x, position.y, ship^, xorput);
     end;
+end;
+
+function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
+begin
+    shuttle_is_hit:= (projectile.y > getmaxy - shuttle_height)
+                     and (projectile.x > shuttle_pos.x - 55) and
+                     (projectile.x < shuttle_pos.x - 55 + ship_width);
+end;
+
+function ufo_is_hit(projectile, ufo_position: pointtype): boolean;
+begin
+    ufo_is_hit:= ((projectile.y < ufo_height) and
+                  (projectile.x > ufo_position.x - 55) and
+                  (projectile.x < ufo_position.x - 55 + ship_width));
 end;
 
 procedure find_center(corner: pointtype; ship_height: integer;
@@ -210,20 +251,6 @@ begin
     setfillstyle(1, black);
     explosion(center, radius + 1);
     setfillstyle(1, white);
-end;
-
-function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
-begin
-    shuttle_is_hit:= (projectile.y > getmaxy - shuttle_height)
-                     and (projectile.x > shuttle_pos.x - 55) and
-                     (projectile.x < shuttle_pos.x - 55 + ship_width);
-end;
-
-function ufo_is_hit(projectile, ufo_position: pointtype): boolean;
-begin
-    ufo_is_hit:= ((projectile.y < ufo_height) and
-                  (projectile.x > ufo_position.x - 55) and
-                  (projectile.x < ufo_position.x - 55 + ship_width));
 end;
 
 procedure wait_and_exit;
@@ -291,32 +318,6 @@ begin
         delay(100);
     end;
     setcolor(white);
-end;
-
-procedure init_ships;
-begin
-    shuttle_position.x:= 1;
-    shuttle_position.y:= getmaxy - shuttle_height;
-    draw_shuttle(shuttle_position);
-    shuttle_size:= imagesize(shuttle_position.x, shuttle_position.y,
-                             shuttle_position.x + ship_width,
-                             shuttle_position.y + shuttle_height);
-
-    getmem(shuttle, shuttle_size);
-    getimage(shuttle_position.x, shuttle_position.y,
-             shuttle_position.x + ship_width,
-             shuttle_position.y + shuttle_height, shuttle^);
-
-    ufo_position.x:= getmaxx - ship_width;
-    ufo_position.y:= 1;
-    draw_ufo(ufo_position);
-    ufo_size:= imagesize(ufo_position.x, ufo_position.y,
-                         ufo_position.x + ship_width,
-                         ufo_position.y + ufo_height);
-
-    getmem(ufo, ufo_size);
-    getimage(ufo_position.x, ufo_position.y, ufo_position.x + ship_width,
-             ufo_position.y + ufo_height, ufo^);
 end;
 
 procedure handle_input;
