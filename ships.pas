@@ -32,6 +32,10 @@ var
     shuttle, ufo: pointer;
     key_code: char;
 
+procedure pring_instructions;
+begin
+end;
+
 procedure init_graph;
 var
     grdriver, grmode: integer;
