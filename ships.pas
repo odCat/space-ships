@@ -32,8 +32,12 @@ var
     shuttle, ufo: pointer;
     key_code: char;
 
-procedure pring_instructions;
+procedure print_instructions;
 begin
+    clrscr;
+    gotoxy(32,12);
+    write('INSTRUCTIONS');
+    readln;
 end;
 
 procedure init_graph;
@@ -372,6 +376,8 @@ begin
 end;
 
 begin
+    print_instructions;
+
     init_graph;
 
     init_ships;
