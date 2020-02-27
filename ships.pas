@@ -28,6 +28,7 @@ const
     ufo_height = 63;
 var
     shuttle_position, ufo_position: pointtype;
+    player1_won: boolean;
     shuttle_size, ufo_size: word;
     shuttle, ufo: pointer;
     key_code: char;
