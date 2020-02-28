@@ -287,6 +287,7 @@ begin
         if (ufo_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(ufo_pos, ufo_height);
+            player1_won:= true;
             wait_and_exit;
             break;
         end;
@@ -317,6 +318,7 @@ begin
         if (shuttle_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(shuttle_pos, shuttle_height);
+            player1_won:= false;
             wait_and_exit;
             break;
         end;
@@ -371,8 +373,14 @@ end;
 procedure print_game_over;
 begin
     clrscr;
-    gotoxy(32,12);
-    write('*** GAME OVER ***');
+    gotoxy(33,12);
+    if (player1_won) then
+    begin
+        write('*** PLAYER1');
+    end else
+        write('*** PLAYER2');
+    write(' WON ***');
+
     readln;
 end;
 
