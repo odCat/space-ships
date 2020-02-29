@@ -36,8 +36,8 @@ var
 procedure print_instructions;
 begin
     clrscr;
-    gotoxy(32,12);
-    write('INSTRUCTIONS');
+    gotoxy(36,12);
+    write('CONTROLS');
     readln;
 end;
 
