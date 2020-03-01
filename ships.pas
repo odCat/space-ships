@@ -36,8 +36,10 @@ var
 procedure print_instructions;
 begin
     clrscr;
-    gotoxy(36,12);
+    gotoxy(36,11);
     write('CONTROLS');
+    gotoxy(31,13);
+    write('PLAYER1    PLAYER2');
     readln;
 end;
 
