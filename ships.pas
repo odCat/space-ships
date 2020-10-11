@@ -373,15 +373,16 @@ begin
 end;
 
 procedure print_game_over;
+const
+    startx = 240;
+    middley = 240;
 begin
-    clrscr;
-    gotoxy(33,12);
     if (player1_won) then
     begin
-        write('*** PLAYER1');
+        outtextxy(startx, middley,'*** PLAYER 1');
     end else
-        write('*** PLAYER2');
-    write(' WON ***');
+        outtextxy(startx, middley,'*** PLAYER 2');
+    outtextxy(startx + 95, middley, ' WON ***');
 
     readln;
 end;
@@ -395,6 +396,6 @@ begin
 
     handle_input;
 
-    close_graph_mode;
     print_game_over;
+    close_graph_mode;
 end.
