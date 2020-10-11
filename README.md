@@ -5,7 +5,7 @@ Video game in which two spaceships battle
 This app is a recreation of a game I made a long time ago,
 in primary school.
 
-It is dedicated to my teachers and my pair programming colleague
+It is a tribute to my teachers and my pair programming colleague
 at the time.
 
 ## TODO
