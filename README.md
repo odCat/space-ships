@@ -18,7 +18,7 @@ so I added some preview screenshots.
 ![screen3](/screens/screen3.png)
 
 ### TODO
-* Find if threading can be added to the application. I don't think
+- [ ] Find if threading can be added to the application. I don't think
 Pascal support it natively
-* Move the ships & graphic methods to a library
-* Add screenshots to the README
+- [ ] Move the ships & graphic methods to a library
+- [x] Add screenshots to the README
