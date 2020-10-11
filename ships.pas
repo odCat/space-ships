@@ -33,22 +33,23 @@ var
     shuttle, ufo: pointer;
     key_code: char;
 
-procedure print_instructions;
-begin
-    clrscr;
-    gotoxy(36,11);
-    write('CONTROLS');
-    gotoxy(31,13);
-    write('PLAYER1    PLAYER2');
-    readln;
-end;
-
 procedure init_graph;
 var
     grdriver, grmode: integer;
 begin
     grdriver:= detect;
     initgraph(grdriver, grmode, 'C:\BP\BGI');
+end;
+
+procedure print_instructions;
+begin
+    outtextxy(289, 225, 'CONTROLS');
+    outtextxy(245, 245, 'PLAYER 1    PLAYER 2');
+    outtextxy(297, 265, chr(27) + '    A');
+    outtextxy(297, 275, chr(26) + '    D');
+    outtextxy(297, 285, chr(24) + '    W/S');
+
+    readln;
 end;
 
 procedure draw_shuttle_tip(corner: pointtype);
@@ -388,9 +389,9 @@ begin
 end;
 
 begin
-    print_instructions;
-
     init_graph;
+
+    print_instructions;
 
     init_ships;
 
