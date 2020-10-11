@@ -51,8 +51,14 @@ procedure print_instructions;
 begin
     outtextxy(289, 225, 'CONTROLS');
     outtextxy(245, 245, 'PLAYER 1    PLAYER 2');
+
+    outtextxy(185, 265, 'MOVE LEFT');
     outtextxy(297, 265, chr(27) + '    A');
+
+    outtextxy(185, 275, 'MOVE RIGHT');
     outtextxy(297, 275, chr(26) + '    D');
+
+    outtextxy(185, 285, 'FIRE');
     outtextxy(297, 285, chr(24) + '    W/S');
 
     readln;
