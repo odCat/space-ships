@@ -41,6 +41,12 @@ begin
     initgraph(grdriver, grmode, 'C:\BP\BGI');
 end;
 
+procedure reset_screen;
+begin
+    setfillstyle(1, black);
+    bar(0, 0, getmaxx, getmaxy);
+end;
+
 procedure print_instructions;
 begin
     outtextxy(289, 225, 'CONTROLS');
@@ -162,6 +168,8 @@ end;
 
 procedure init_ships;
 begin
+    reset_screen;
+
     shuttle_position.x:= 1;
     shuttle_position.y:= getmaxy - shuttle_height;
     draw_shuttle(shuttle_position);
@@ -392,11 +400,9 @@ begin
     init_graph;
 
     print_instructions;
-
     init_ships;
-
     handle_input;
-
     print_game_over;
+
     close_graph_mode;
 end.
