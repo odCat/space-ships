@@ -226,8 +226,8 @@ end;
 
 function shuttle_is_hit(shuttle_pos, projectile: pointtype): boolean;
 begin
-    shuttle_is_hit:= (projectile.y > getmaxy - shuttle_height)
-                     and (projectile.x > shuttle_pos.x - 55) and
+    shuttle_is_hit:= (projectile.y > getmaxy - shuttle_height) and
+                     (projectile.x > shuttle_pos.x - 55) and
                      (projectile.x < shuttle_pos.x - 55 + ship_width);
 end;
 
