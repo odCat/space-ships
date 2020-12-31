@@ -1,7 +1,7 @@
 {
  Space Ships - Video game in which two spaceships battle
 
- Copyright (C) 2019, 2020 Mihai Gătejescu (gus666xe@gmail.com)
+ Copyright (C) 2019, 2020, 2021 Mihai Gătejescu (gus666xe@gmail.com)
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
