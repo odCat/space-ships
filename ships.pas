@@ -38,7 +38,7 @@ var
     grdriver, grmode: integer;
 begin
     grdriver:= vga;
-    grmode:= vgahi;
+    grmode:= vgahi; { 640x480x16 }
     initgraph(grdriver, grmode, '');
 end;
 
@@ -295,8 +295,8 @@ begin
     dimension:= imagesize(shuttle_pos.x + 55, shuttle_pos.y - 1,
                           shuttle_pos.x + 55, shuttle_pos.y - 11);
     getmem(projectile, dimension);
-    getimage(shuttle_pos.x + 55, shuttle_pos.y - 1,
-             shuttle_pos.x + 55, shuttle_pos.y - 11, projectile^);
+    getimage(shuttle_pos.x + 55, shuttle_pos.y - 11,
+             shuttle_pos.x + 55, shuttle_pos.y - 1, projectile^);
 
     while shuttle_pos.y > 0 do
     begin
@@ -403,6 +403,7 @@ begin
 	    if (player_won = 2) then begin
 		outtextxy(startx, middley,'*** PLAYER 2');
 	    end;
+
 	    outtextxy(startx + 95, middley, ' WON ***');
     end;
 
