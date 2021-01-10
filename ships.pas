@@ -280,7 +280,7 @@ end;
 
 procedure wait_and_exit;
 begin
-    delay(2000);
+    delay(1000);
     key_code:= #27;
 end;
 
@@ -311,7 +311,7 @@ begin
         putimage(shuttle_pos.x + 55, shuttle_pos.y - 11, projectile^, xorput);
         shuttle_pos.y:= shuttle_pos.y - 10;
         putimage(shuttle_pos.x + 55, shuttle_pos.y - 11, projectile^, xorput);
-        delay(100);
+        delay(50);
     end;
     setcolor(white);
 end;
@@ -342,7 +342,7 @@ begin
         putimage(ufo_pos.x + 55, ufo_pos.y + 63, projectile^, xorput);
         ufo_pos.y:= ufo_pos.y + 10;
         putimage(ufo_pos.x + 55, ufo_pos.y + 63, projectile^, xorput);
-        delay(100);
+        delay(50);
     end;
     setcolor(white);
 end;
