@@ -28,7 +28,7 @@ const
     ufo_height = 63;
 var
     shuttle_position, ufo_position: pointtype;
-    player1_won: boolean;
+    player_won: shortint = 0;
     shuttle_size, ufo_size: word;
     shuttle, ufo: pointer;
     key_code: char;
@@ -305,7 +305,7 @@ begin
         if (ufo_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(ufo_pos, ufo_height);
-            player1_won:= true;
+            player_won:= 1;
             wait_and_exit;
             break;
         end;
@@ -336,7 +336,7 @@ begin
         if (shuttle_is_hit(shuttle_pos, ufo_pos)) then
         begin
             destroy_ship(shuttle_pos, shuttle_height);
-            player1_won:= false;
+            player_won:= 2;
             wait_and_exit;
             break;
         end;
@@ -393,12 +393,20 @@ const
     startx = 240;
     middley = 240;
 begin
-    if (player1_won) then
+    if (player_won = 0) then begin
+        outtextxy(startx, middley, '    *** DRAW ***    ');
+    end
+    else
     begin
-        outtextxy(startx, middley,'*** PLAYER 1');
-    end else
-        outtextxy(startx, middley,'*** PLAYER 2');
-    outtextxy(startx + 95, middley, ' WON ***');
+	    if (player_won = 1) then begin
+		outtextxy(startx, middley,'*** PLAYER 1');
+	    end;
+
+	    if (player_won = 2) then begin
+		outtextxy(startx, middley,'*** PLAYER 2');
+	    end;
+	    outtextxy(startx + 95, middley, ' WON ***');
+    end;
 
     readln;
 end;
