@@ -138,8 +138,6 @@ begin
 end;
 
 procedure draw_shuttle_tail(corner: pointtype);
-var
-    temp: tripoints;
 begin
     line(corner.x + 55, corner.y + 75, corner.x + 55, corner.y + 120);
 end;
