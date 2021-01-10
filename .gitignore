@@ -7,3 +7,5 @@
 *.EXE
 *.exe
 *~
+ships
+*.o
