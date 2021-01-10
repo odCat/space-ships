@@ -18,7 +18,7 @@
 }
 
 program ships;
-uses crt, graph;
+uses crt, ptcgraph;
 type
     tripoints = array [0.. 2] of pointtype;
 const
@@ -37,8 +37,9 @@ procedure init_graph;
 var
     grdriver, grmode: integer;
 begin
-    grdriver:= detect;
-    initgraph(grdriver, grmode, 'C:\BP\BGI');
+    grdriver:= vga;
+    grmode:= vgahi;
+    initgraph(grdriver, grmode, '');
 end;
 
 procedure reset_screen;
