@@ -18,7 +18,7 @@
 }
 
 program ships;
-uses crt, ptcgraph;
+uses ptccrt, ptcgraph;
 type
     tripoints = array [0.. 2] of pointtype;
 const
@@ -406,7 +406,8 @@ begin
 	    outtextxy(startx + 95, middley, ' WON ***');
     end;
 
-    readln;
+    repeat
+    until keypressed;
 end;
 
 begin
