@@ -1,7 +1,7 @@
 {
  Space Ships - Video game in which two spaceships battle
 
- Copyright (C) 2019, 2020, 2021 Mihai Gătejescu (gus666xe@gmail.com)
+ Copyright (C) 2019, 2020, 2021, 2023 Mihai Gătejescu
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
@@ -127,7 +127,7 @@ begin
     temp[2].x:= corner.x + 40;
     temp[2].y:= corner.y + 120;
     drawpoly(3, temp);
-    
+
     temp[0].x:= corner.x + 70;
     temp[0].y:= corner.y + 30;
     temp[1].x:= corner.x + 75;
