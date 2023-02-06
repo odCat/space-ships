@@ -18,7 +18,7 @@
 }
 
 program ships;
-uses ptccrt, ptcgraph;
+uses cthreads, ptccrt, ptcgraph;
 type
     tripoints = array [0.. 2] of pointtype;
 const
